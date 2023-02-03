@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+		rel="stylesheet">
+    <link rel="stylesheet" href="assets/styleLogin.css">
+    <link rel="icon" type="icon/x-icon" href="images/cles.png">
+    <script type="module" src="login.js" defer></script>
+    <title>Connexion</title>
+</head>
+
+<body>
+    <header>
+        <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+        <nav>
+            <ul>
+                <li>projets</li>
+                <li>contact</li>
+                <li class="bold">login</li>
+                <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+            </ul>
+        </nav>
+    </header>
+    <article>
+        <h2>Log In</h2>
+        <form method="post" action="">
+            <p>
+                <label for="E-mail">E-mail</label> :
+            </p>
+            <p>
+                <input type="email" name="Email" class="email">
+            </p>
+        </form>
+        <form method="post" action="">
+            <p>
+                <label for="password">Mot de passe</label> :
+            </p>
+            <p>
+                <input type="password" name="password" class="password" id="code">
+                <div id="code-validation"></div>
+            </p>
+        </form>
+        <input type="submit" value="Se connecter" id="submit-btn"/>
+        <p class="forgot"><a href="#">mot de passe oublié</a></p>
+    </article>
+</body>
+
+</html>

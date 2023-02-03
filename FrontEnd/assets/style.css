@@ -125,6 +125,27 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
+/* Ajout code pour filtres */
+.filtres{
+	display: flex;
+	justify-content: space-between;
+	width: 450px;
+	margin: auto;
+	margin-bottom: 51px;
+}
+.filtres button{
+	border: 1px solid #1D6154;
+	border-radius: 30px;
+	color: #1D6154;
+	padding: 9px;
+	font-weight: 700;
+	background-color: white;
+}
+.filtres button:focus, .filtres button:hover{
+	background-color: #1D6154;
+	color: white;
+}
 .gallery {
 	width: 100%;
 	display: grid;

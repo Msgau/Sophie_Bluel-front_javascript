@@ -1,4 +1,5 @@
 const reponse = await fetch('http://localhost:5678/api/works'); // On va chercher le Json
+// const reponse = await fetch('flemme.json'); // On va chercher le Json
 const objets = await reponse.json(); // On crée une const objets qu'on asssocie au résultat renvoyé par le json. Equivalent à "1ere ligne".then.pieces => pieces.json();
 if (reponse.ok) {
     console.log(objets)
@@ -14,6 +15,8 @@ function genererObjets(objets) {
     const objetElement = document.createElement("figure")
     const imageElement = document.createElement("img");
     imageElement.src = article.imageUrl;
+    imageElement.alt = article.title;
+    imageElement.crossOrigin = "anonymous";
     console.log(article.imageUrl)
     const titreElement = document.createElement("figcaption");
     titreElement.innerText = article.title;
@@ -26,12 +29,54 @@ function genererObjets(objets) {
 
 genererObjets(objets);
 
+// Filtes 
 
+// Revenir à tous
+const boutonTous = document.querySelector(".btnTous");
+boutonTous.addEventListener("click", function(){
+  document.querySelector(".gallery").innerHTML="";
+  genererObjets(objets);
+})
 
+// Filtrer les objets
 
+const boutonItems = document.querySelector(".btnItems");
 
+boutonItems.addEventListener("click", function(){
+  const itemsFiltres = objets.filter(function(item){
+    return item.categoryId === 1; // On retourne l'élément seulement si categoryId est 1 (ce qui correspond aux objets)
+  });
+  // Autre façon de faire
+  // const result = objets.filter(nom => nom.categoryId===1); 
 
+  // Effacement de l'écran et régénération de la page
+  document.querySelector(".gallery").innerHTML="";
+  genererObjets(itemsFiltres);
+})
 
+// Filtrer les appartements
+
+const boutonAppartements = document.querySelector(".btnAppartements");
+
+boutonAppartements.addEventListener("click", function(){
+  const itemsFiltres = objets.filter(function(item){
+    return item.categoryId === 2; 
+  });
+  document.querySelector(".gallery").innerHTML="";
+  genererObjets(itemsFiltres);
+})
+
+  // Filtrer les Hôtels et restaurants
+
+const boutonHotels = document.querySelector(".btnHotels");
+
+boutonHotels.addEventListener("click", function(){
+  const itemsFiltres = objets.filter(function(item){
+    return item.categoryId === 3; 
+  });
+  document.querySelector(".gallery").innerHTML="";
+  genererObjets(itemsFiltres);
+})
 
 
 // fetch("http://localhost:5678/api/works")
