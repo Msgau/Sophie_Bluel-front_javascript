@@ -1,3 +1,20 @@
+function changerCouleurVert(){
+  console.log("fef")
+  document.querySelector(".btnTous").style.color= "#1D6154";
+  document.querySelector(".btnTous").style.backgroundColor= "white"
+  console.log("fef")
+  }
+  function changerCouleurBlanc(){
+    console.log("fouf")
+    document.querySelector(".btnTous").style.color= "white";
+    document.querySelector(".btnTous").style.backgroundColor= "#1D6154"
+    console.log("fouf")
+    }
+document.querySelector(".btnItems").addEventListener("click", changerCouleurVert)
+document.querySelector(".btnAppartements").addEventListener("click", changerCouleurVert)
+document.querySelector(".btnHotels").addEventListener("click", changerCouleurVert)
+document.querySelector(".btnTous").addEventListener("click", changerCouleurBlanc)
+
 const reponse = await fetch('http://localhost:5678/api/works'); // On va chercher le Json
 // const reponse = await fetch('flemme.json'); // On va chercher le Json
 const objets = await reponse.json(); // On crée une const objets qu'on asssocie au résultat renvoyé par le json. Equivalent à "1ere ligne".then.pieces => pieces.json();

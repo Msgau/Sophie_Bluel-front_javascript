@@ -141,12 +141,14 @@ li:hover {
 .filtres button{
 	border: 1px solid #1D6154;
 	border-radius: 30px;
-	color: #1D6154;
 	padding: 9px;
 	font-weight: 700;
+}
+.btnItems, .btnAppartements, .btnHotels{
+	color: #1D6154;
 	background-color: white;
 }
-.filtres button:focus, .filtres button:hover{
+.filtres button:focus, .filtres button:hover, .btnTous{
 	background-color: #1D6154;
 	color: white;
 }
