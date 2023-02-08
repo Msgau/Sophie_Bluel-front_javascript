@@ -11,7 +11,7 @@ function genererObjets(objets) {
     const article = objets[i];
     // Récupération de l'élément du DOM qui accueillera les objets
     const sectionGallery = document.querySelector(".gallery");
-            // Création de la balise figure qui englobe image et titre
+    // Création de la balise figure qui englobe image et titre
     const objetElement = document.createElement("figure")
     const imageElement = document.createElement("img");
     imageElement.src = article.imageUrl;
@@ -29,7 +29,7 @@ function genererObjets(objets) {
 
 genererObjets(objets);
 
-// Filtes 
+// Filtres 
 
 // Revenir à tous
 const boutonTous = document.querySelector(".btnTous");
