@@ -35,25 +35,22 @@
 // connexionUtilisateur();
 
 function connexionUtilisateur() {
+
     const connexion = document.querySelector(".connexion");
-    console.log("fef")
     connexion.addEventListener("submit", function (event) {
+        console.log("retard")
         event.preventDefault();
-        const nouvelleConnexion = {
-            email: event.target.querySelector("[name=Email]").value,
-            password: event.target.querySelector("[name=password]").value
-        };
-        const identifiants = JSON.stringify(nouvelleConnexion);
+        let form = new FormData(connexion);
+        let string = form.stringify;
         fetch("http://localhost:5678/api/users/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: identifiants
+            body: string
         })
         .then((response) => response.JSON())
         .then((data)=>console.log(data))
     })
-}
-
+    }
 
 
 // email: sophie.bluel@test.tld
@@ -63,24 +60,32 @@ function connexionUtilisateur() {
 //     console.log("fef")
 // }
 
-// const boutonCo = document.getElementById("submit-btn")
-// boutonCo.addEventListener("click", function () {
-//     connexionUtilisateur();
-// })
-
-
-// let user = {
-//     name: 'John',
-//     surname: 'Smith'
-//   };
-  
-//   let response = await fetch('/article/fetch/post/user', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json;charset=utf-8'
-//     },
-//     body: JSON.stringify(user)
-//   });
-  
-//   let result = await response.json();
-//   alert(result.message);
+// const boutonCo = document.getElementById("submit-btn");
+// boutonCo.addEventListener("click", connexionUtilisateur());
+function login(){
+    // envoi des données récupérées de l'utilisateur
+    fetch ("http://localhost:5678/api/users/login", {
+    method: "POST",
+    body: JSON.stringify({
+        "email": "sophie.bluel@test.tld",
+        "password": "S0phie"
+      }),
+    headers: { 'Accept': 'application/json', "Content-Type": "application/json" },
+    })
+    .then((res) => res.json())
+    .then((data) => {
+        // récupération de la commande dans la console
+        console.log(data);
+        // nettoyage du panier
+        // localStorage.clear();
+        // création d'un ID de commande dans le localstorage
+        // localStorage.setItem("orderId", data.orderId);
+        // redirection vers la page de confirmation
+        // window.location = confirmation.html?id=${data.orderId};
+    })
+    .catch((err) => {
+        console.log("POST erreur", err);
+    })
+}
+const boutonCo = document.getElementById("submit-btn");
+boutonCo.addEventListener("click", login);
