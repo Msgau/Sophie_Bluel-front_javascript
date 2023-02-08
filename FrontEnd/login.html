@@ -27,24 +27,23 @@
     </header>
     <article>
         <h2>Log In</h2>
-        <form method="post" action="">
-            <p>
+        <form method="post" class="connexion" action="index.html">
+            <div>
                 <label for="E-mail">E-mail</label> :
-            </p>
-            <p>
+            </div>
+            <div>
                 <input type="email" name="Email" class="email">
-            </p>
-        </form>
-        <form method="post" action="">
-            <p>
+            </div>
+            <div>
                 <label for="password">Mot de passe</label> :
-            </p>
-            <p>
+            </div>
+            <div>
                 <input type="password" name="password" class="password" id="code">
                 <div id="code-validation"></div>
-            </p>
+            </div>
+            <input type="submit" value="Se connecter" id="submit-btn"/>
         </form>
-        <input type="submit" value="Se connecter" id="submit-btn"/>
+        
         <p class="forgot"><a href="#">mot de passe oublié</a></p>
     </article>
 </body>
