@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
-		rel="stylesheet">
+        rel="stylesheet">
     <link rel="stylesheet" href="assets/styleLogin.css">
     <link rel="icon" type="icon/x-icon" href="images/cles.png">
     <script type="module" src="login.js" defer></script>
@@ -27,24 +27,26 @@
     </header>
     <article>
         <h2>Log In</h2>
-        <form method="post" class="connexion" action="index.html">
-            <div>
-                <label for="E-mail">E-mail</label> :
-            </div>
-            <div>
-                <input type="email" name="email" class="email" id="email">
-            </div>
-            <div>
-                <label for="password">Mot de passe</label> :
-            </div>
-            <div>
-                <input type="password" name="password" class="password" id="code">
-                <div id="code-validation"></div>
-            </div>
-        </form>
-        <input type="submit" value="Se connecter" id="submit-btn"/>
-        
-        <p class="forgot"><a href="#">mot de passe oublié</a></p>
+        <div class="already">
+            <form method="post" class="connexion" action="index.html">
+                <div>
+                    <label for="E-mail">E-mail</label> :
+                </div>
+                <div>
+                    <input type="email" name="email" class="email" id="email">
+                </div>
+                <div>
+                    <label for="password">Mot de passe</label> :
+                </div>
+                <div>
+                    <input type="password" name="password" class="password" id="code">
+                    <div id="code-validation"></div>
+                </div>
+            </form>
+            <input type="submit" value="Se connecter" id="submit-btn">
+
+            <p class="forgot"></p>
+        </div>
     </article>
 </body>
 

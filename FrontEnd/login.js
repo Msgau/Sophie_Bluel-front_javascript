@@ -34,24 +34,41 @@
 //     });
 // connexionUtilisateur();
 
-function connexionUtilisateur() {
+// function connexionUtilisateur() {
 
-    const connexion = document.querySelector(".connexion");
-    connexion.addEventListener("submit", function (event) {
-        console.log("retard")
-        event.preventDefault();
-        let form = new FormData(connexion);
-        let string = form.stringify;
-        fetch("http://localhost:5678/api/users/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: string
-        })
-        .then((response) => response.JSON())
-        .then((data)=>console.log(data))
-    })
-    }
+//     const connexion = document.querySelector(".connexion");
+//     connexion.addEventListener("submit", function (event) {
+//         console.log("retard")
+//         event.preventDefault();
+//         let form = new FormData(connexion);
+//         let string = form.stringify;
+//         fetch("http://localhost:5678/api/users/login", {
+//             method: "POST",
+//             headers: { "Content-Type": "application/json" },
+//             body: string
+//         })
+//         .then((response) => response.JSON())
+//         .then((data)=>console.log(data))
+//     })
+//     }
 
+        // const connexion = document.querySelector("#submit-btn");
+        // connexion.addEventListener("click", function (event) {
+        //     event.preventDefault();
+        //     console.log("fef")
+        //     const nouvelleConnexion = {
+        //         email: querySelector("[name=Email]").value,
+        //         password: querySelector("[name=password]").value
+        //     };
+        //     const identifiants = JSON.stringify(nouvelleConnexion);
+        //     fetch("http://localhost:5678/api/users/login", {
+        //         method: "POST",
+        //         headers: { "Content-Type": "application/json" },
+        //         body: identifiants
+        //     })
+        //     .then((response) => response.JSON())
+        //     .then((data)=>console.log(data))
+        // })
 
 // email: sophie.bluel@test.tld
 // password: S0phie
@@ -62,13 +79,15 @@ function connexionUtilisateur() {
 
 // const boutonCo = document.getElementById("submit-btn");
 // boutonCo.addEventListener("click", connexionUtilisateur());
-function login(){
+if(localStorage.getItem("token") == null){
+
+async function login(){
     // envoi des données récupérées de l'utilisateur
-    fetch ("http://localhost:5678/api/users/login", {
+    await fetch ("http://localhost:5678/api/users/login", {
     method: "POST",
     body: JSON.stringify({
-        "email": "sophie.bluel@test.tld",
-        "password": "S0phie"
+        "email": document.querySelector("[name=email]").value,
+        "password": document.querySelector("[name=password]").value
       }),
     headers: { 'Accept': 'application/json', "Content-Type": "application/json" },
     })
@@ -79,13 +98,18 @@ function login(){
         // nettoyage du panier
         // localStorage.clear();
         // création d'un ID de commande dans le localstorage
-        // localStorage.setItem("orderId", data.orderId);
+        localStorage.setItem("token", JSON.stringify(data.token));
         // redirection vers la page de confirmation
-        // window.location = confirmation.html?id=${data.orderId};
+        document.location.href="index.html";
+        // window.location = confirmation.html?id=${data.cleLocale};
     })
     .catch((err) => {
         console.log("POST erreur", err);
-    })
-}
+        // document.getElementById
+    })}
 const boutonCo = document.getElementById("submit-btn");
 boutonCo.addEventListener("click", login);
+}
+else{
+    document.location.href="index.html"
+}

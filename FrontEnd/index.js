@@ -1,19 +1,44 @@
+// Couleur des filtres
+
 function changerCouleurVert(){
-  console.log("fef")
   document.querySelector(".btnTous").style.color= "#1D6154";
-  document.querySelector(".btnTous").style.backgroundColor= "white"
-  console.log("fef")
-  }
-  function changerCouleurBlanc(){
-    console.log("fouf")
+  document.querySelector(".btnTous").style.backgroundColor= "white"}
+function changerCouleurBlanc(){
     document.querySelector(".btnTous").style.color= "white";
-    document.querySelector(".btnTous").style.backgroundColor= "#1D6154"
-    console.log("fouf")
-    }
-document.querySelector(".btnItems").addEventListener("click", changerCouleurVert)
-document.querySelector(".btnAppartements").addEventListener("click", changerCouleurVert)
-document.querySelector(".btnHotels").addEventListener("click", changerCouleurVert)
+    document.querySelector(".btnTous").style.backgroundColor= "#1D6154"}
+    
+document.querySelector('.btnItems,.btnAppartements,.btnHotels').addEventListener("click", changerCouleurVert)
 document.querySelector(".btnTous").addEventListener("click", changerCouleurBlanc)
+
+// Affichage admin
+if (localStorage.getItem("token") != null){
+  const top = document.querySelector("header");
+  const BlackString = document.createElement("div");
+  BlackString.id = "blackString";
+  BlackString.innerHTML = `<p><a href="#" class="edition"><i class="fa-regular fa-pen-to-square"></i>   Mode édition</a></p>
+  <p class="changement"><a href="#" class="Achangement">publier les changements</a></p>`
+  const Boutonlogout = document.querySelector("nav ul li a");
+  Boutonlogout.href="index.html";
+  Boutonlogout.id="sortie";
+  Boutonlogout.innerHTML = "logout";
+  top.appendChild(BlackString);
+
+  function logout(){
+    localStorage.removeItem("token");
+  }
+
+  Boutonlogout.addEventListener("click", logout)
+
+
+
+//   const boutonSortie = document.querySelector("#sortie")
+//   boutonSortie.addEventListener("Click", function(){
+//     function(sortie());
+//   })
+
+}
+
+// Affichage classique
 
 const reponse = await fetch('http://localhost:5678/api/works'); // On va chercher le Json
 // const reponse = await fetch('flemme.json'); // On va chercher le Json
@@ -34,7 +59,6 @@ function genererObjets(objets) {
     imageElement.src = article.imageUrl;
     imageElement.alt = article.title;
     imageElement.crossOrigin = "anonymous";
-    console.log(article.imageUrl)
     const titreElement = document.createElement("figcaption");
     titreElement.innerText = article.title;
 
