@@ -52,26 +52,23 @@
 //     })
 //     }
 
-        // const connexion = document.querySelector("#submit-btn");
-        // connexion.addEventListener("click", function (event) {
-        //     event.preventDefault();
-        //     console.log("fef")
-        //     const nouvelleConnexion = {
-        //         email: querySelector("[name=Email]").value,
-        //         password: querySelector("[name=password]").value
-        //     };
-        //     const identifiants = JSON.stringify(nouvelleConnexion);
-        //     fetch("http://localhost:5678/api/users/login", {
-        //         method: "POST",
-        //         headers: { "Content-Type": "application/json" },
-        //         body: identifiants
-        //     })
-        //     .then((response) => response.JSON())
-        //     .then((data)=>console.log(data))
-        // })
-
-// email: sophie.bluel@test.tld
-// password: S0phie
+// const connexion = document.querySelector("#submit-btn");
+// connexion.addEventListener("click", function (event) {
+//     event.preventDefault();
+//     console.log("fef")
+//     const nouvelleConnexion = {
+//         email: querySelector("[name=Email]").value,
+//         password: querySelector("[name=password]").value
+//     };
+//     const identifiants = JSON.stringify(nouvelleConnexion);
+//     fetch("http://localhost:5678/api/users/login", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: identifiants
+//     })
+//     .then((response) => response.JSON())
+//     .then((data)=>console.log(data))
+// })
 
 // function connexionUtilisateur() {
 //     console.log("fef")
@@ -79,37 +76,49 @@
 
 // const boutonCo = document.getElementById("submit-btn");
 // boutonCo.addEventListener("click", connexionUtilisateur());
-if(localStorage.getItem("token") == null){
 
-async function login(){
+
+// if(localStorage.getItem("token") == null){
+
+async function login() {
     // envoi des données récupérées de l'utilisateur
-    await fetch ("http://localhost:5678/api/users/login", {
-    method: "POST",
-    body: JSON.stringify({
-        "email": document.querySelector("[name=email]").value,
-        "password": document.querySelector("[name=password]").value
-      }),
-    headers: { 'Accept': 'application/json', "Content-Type": "application/json" },
+    await fetch("http://localhost:5678/api/users/login", {
+        method: "POST",
+        body: JSON.stringify({
+            "email": document.querySelector("[name=email]").value,
+            "password": document.querySelector("[name=password]").value
+        }),
+        headers: { 'Accept': 'application/json', "Content-Type": "application/json" }
     })
-    .then((res) => res.json())
-    .then((data) => {
-        // récupération de la commande dans la console
-        console.log(data);
-        // nettoyage du panier
-        // localStorage.clear();
-        // création d'un ID de commande dans le localstorage
-        localStorage.setItem("token", JSON.stringify(data.token));
-        // redirection vers la page de confirmation
-        document.location.href="index.html";
-        // window.location = confirmation.html?id=${data.cleLocale};
-    })
-    .catch((err) => {
-        console.log("POST erreur", err);
-        // document.getElementById
-    })}
+
+        .then((res) => res.json())
+        .then((data) => {
+            // récupération de la commande dans la console
+            console.log(data);
+            // création d'un ID de commande dans le localstorage
+            localStorage.setItem("token", JSON.stringify(data.token));
+        })
+    // .catch((err) => {
+
+    //     const erreur = document.querySelector(".forgot");
+    //     erreur.innerHTML = "Erreur dans l’identifiant ou le mot de passe";
+    //     // console.log("POST erreur", err);
+    //     // console.log(err);
+    // })
+    // if()
+    function logout() {
+        localStorage.removeItem("token");
+    }
+
+    if (localStorage.getItem("token") == "undefined") {
+        const erreur = document.querySelector(".forgot");
+        logout();
+        erreur.innerHTML = "Erreur dans l’identifiant ou le mot de passe";
+    }
+    else if (localStorage.getItem("token") != null) {
+        document.location.href = "index.html"
+    }
+}
+
 const boutonCo = document.getElementById("submit-btn");
 boutonCo.addEventListener("click", login);
-}
-else{
-    document.location.href="index.html"
-}

@@ -11,7 +11,8 @@ document.querySelector('.btnItems,.btnAppartements,.btnHotels').addEventListener
 document.querySelector(".btnTous").addEventListener("click", changerCouleurBlanc)
 
 // Affichage admin
-if (localStorage.getItem("token") != null){
+if (localStorage.getItem("token") != null && localStorage.getItem("token") != "undefined"){
+  // Header admin
   const top = document.querySelector("header");
   const BlackString = document.createElement("div");
   BlackString.id = "blackString";
@@ -22,13 +23,28 @@ if (localStorage.getItem("token") != null){
   Boutonlogout.id="sortie";
   Boutonlogout.innerHTML = "logout";
   top.appendChild(BlackString);
-
+//Fonction logout
   function logout(){
-    localStorage.removeItem("token");
-  }
-
+    localStorage.removeItem("token");}
   Boutonlogout.addEventListener("click", logout)
-
+// Bouton modifier PP
+const boutonModifierPP = document.querySelector("main figure");
+const divModifierPP = document.createElement("div");
+divModifierPP.class="modifier";
+divModifierPP.innerHTML=`<i class="fa-regular fa-pen-to-square"></i> modifier`
+boutonModifierPP.appendChild(divModifierPP);
+// Bouton modifier projets
+const boutonModifierProjets = document.querySelector("#portfolio");
+boutonModifierProjets.innerHTML=`<section id="portfolio">
+<div class="btnProjets"><h2>Mes Projets</h2>
+<div class="modifier"><i class="fa-regular fa-pen-to-square"></i> modifier</div></div>
+<div class="filtres">
+  <button class="btnTous">Tous</button>
+  <button class="btnItems">Objets</button>
+  <button class="btnAppartements">Appartements</button>
+  <button class="btnHotels">Hôtels et restaurants</button>
+</div>
+<div class="gallery"></div>`
 
 
 //   const boutonSortie = document.querySelector("#sortie")
@@ -46,7 +62,7 @@ const objets = await reponse.json(); // On crée une const objets qu'on asssocie
 if (reponse.ok) {
     console.log(objets)
   }
-// pour tous les objets, on utilise un for of. On utilise aussi une fonction gernererPieces comme ça on purra la rappeler plusieurs fois pour mettre à jour la page web
+// pour tous les objets, on utilise un for of. On utilise aussi une fonction gernererObjets comme ça on purra la rappeler plusieurs fois pour mettre à jour la page web
 function genererObjets(objets) {
   for (let i = 0; i < objets.length; i++){
 

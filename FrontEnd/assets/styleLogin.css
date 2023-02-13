@@ -70,10 +70,15 @@ input{
 #submit-btn{
     background-color: #1D6154;
     color: white;
-	padding: 10px 38px;
     width: 179px;
-    border-radius: 60px;
-	
+	margin: 37px 0px 0 100px;
+    border-radius:60px;	
+}
+.email{
+	margin-bottom: 30px;
+}
+.mdp{
+	text-align: left;
 }
 .forgot{
     text-decoration: underline;
