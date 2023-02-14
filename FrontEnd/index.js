@@ -1,14 +1,3 @@
-// Couleur des filtres
-
-function changerCouleurVert(){
-  document.querySelector(".btnTous").style.color= "#1D6154";
-  document.querySelector(".btnTous").style.backgroundColor= "white"}
-function changerCouleurBlanc(){
-    document.querySelector(".btnTous").style.color= "white";
-    document.querySelector(".btnTous").style.backgroundColor= "#1D6154"}
-    
-document.querySelector('.btnItems,.btnAppartements,.btnHotels').addEventListener("click", changerCouleurVert)
-document.querySelector(".btnTous").addEventListener("click", changerCouleurBlanc)
 
 // Affichage admin
 if (localStorage.getItem("token") != null && localStorage.getItem("token") != "undefined"){
@@ -30,28 +19,61 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
 // Bouton modifier PP
 const boutonModifierPP = document.querySelector("main figure");
 const divModifierPP = document.createElement("div");
-divModifierPP.class="modifier";
+divModifierPP.className="modifier";
 divModifierPP.innerHTML=`<i class="fa-regular fa-pen-to-square"></i> modifier`
 boutonModifierPP.appendChild(divModifierPP);
 // Bouton modifier projets
 const boutonModifierProjets = document.querySelector("#portfolio");
 boutonModifierProjets.innerHTML=`<section id="portfolio">
 <div class="btnProjets"><h2>Mes Projets</h2>
-<div class="modifier"><i class="fa-regular fa-pen-to-square"></i> modifier</div></div>
+<div class="modifier"><i class="fa-regular fa-pen-to-square"></i> <a href="#modal1" id="modifier">modifier</a></div></div>
 <div class="filtres">
   <button class="btnTous">Tous</button>
   <button class="btnItems">Objets</button>
   <button class="btnAppartements">Appartements</button>
   <button class="btnHotels">Hôtels et restaurants</button>
 </div>
-<div class="gallery"></div>`
+<div class="gallery"></div>
+
+`
+
+// Modale
+let modal = null 
+
+function stopPropagation(e){
+  e.stopPropagation()
+}
+
+function closeModal(e){
+  console.log("jaj")
+  if (modal === null) return
+  e.preventDefault()
+  modal.style.display = "none"
+  modal.setAttribute('aria-hidden', true)
+  modal.setAttribute('aria-modal', false)
+  modal.removeEventListener('click', closeModal)
+  modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)
+  modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)
+
+  modal=null
+}
+
+function openModal(e){
+  console.log("fef")
+  e.preventDefault()
+  const target = document.querySelector('.modal') 
+  target.style.display = null
+  target.setAttribute('aria-hidden', false)
+  target.setAttribute('aria-modal', true)
+  modal=target
+  modal.addEventListener('click', closeModal)
+  modal.querySelector('.js-modal-close').addEventListener('click', closeModal)
+  modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
+}
 
 
-//   const boutonSortie = document.querySelector("#sortie")
-//   boutonSortie.addEventListener("Click", function(){
-//     function(sortie());
-//   })
-
+const modal1 = document.getElementById("modifier")
+  modal1.addEventListener('click', openModal)
 }
 
 // Affichage classique
@@ -134,6 +156,18 @@ boutonHotels.addEventListener("click", function(){
   document.querySelector(".gallery").innerHTML="";
   genererObjets(itemsFiltres);
 })
+
+// Couleur des filtres
+
+function changerCouleurVert(){
+  document.querySelector(".btnTous").style.color= "#1D6154";
+  document.querySelector(".btnTous").style.backgroundColor= "white"}
+function changerCouleurBlanc(){
+    document.querySelector(".btnTous").style.color= "white";
+    document.querySelector(".btnTous").style.backgroundColor= "#1D6154"}
+    
+document.querySelectorAll('.btnItems,.btnAppartements,.btnHotels').forEach(button => {button.addEventListener("click", changerCouleurVert)})
+document.querySelector(".btnTous").addEventListener("click", changerCouleurBlanc)
 
 
 // fetch("http://localhost:5678/api/works")
