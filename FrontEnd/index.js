@@ -54,8 +54,8 @@ function closeModal(e){
   modal.removeEventListener('click', closeModal)
   modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)
   modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)
-
   modal=null
+  sectionGallery.innerText = "";
 }
 
 function openModal(e){
@@ -69,11 +69,50 @@ function openModal(e){
   modal.addEventListener('click', closeModal)
   modal.querySelector('.js-modal-close').addEventListener('click', closeModal)
   modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
+  document.querySelector(".galleryModale").innerHTML="";
+  genererObjetsModale(objets);
 }
-
 
 const modal1 = document.getElementById("modifier")
   modal1.addEventListener('click', openModal)
+
+const reponseModale = await fetch('http://localhost:5678/api/works'); // On va chercher le Json
+// const reponse = await fetch('flemme.json'); // On va chercher le Json
+const objets = await reponseModale.json(); // On crée une const objets qu'on asssocie au résultat renvoyé par le json. Equivalent à "1ere ligne".then.pieces => pieces.json();
+if (reponseModale.ok) {
+    console.log(objets)
+  }
+// pour tous les objets, on utilise un for of. On utilise aussi une fonction gernererObjets comme ça on purra la rappeler plusieurs fois pour mettre à jour la page web
+function genererObjetsModale(objets) {
+  for (let i = 0; i < objets.length; i++){
+
+    const article = objets[i];
+    // Récupération de l'élément du DOM qui accueillera les objets
+    const sectionGallery = document.querySelector(".galleryModale");
+    // Création de la balise figure qui englobe image et titre
+    const objetElement = document.createElement("figure");
+    const divImageElement = document.createElement("div");
+    divImageElement.className = "cadreImage"
+    const imageElement = document.createElement("img");
+    imageElement.src = article.imageUrl;
+    imageElement.alt = article.title;
+    imageElement.crossOrigin = "anonymous";
+    const btnCorbeille = document.createElement("button")
+    btnCorbeille.className = "corbeille"
+    btnCorbeille.innerHTML = `<i class="fa-regular fa-trash-can"></i>`
+    const btnEditer = document.createElement("div")
+    btnEditer.className = "btnEditerModale"
+    btnEditer.innerText = "editer";
+    // const titreElement = document.createElement("figcaption");
+    // titreElement.innerText = article.title;
+
+    sectionGallery.appendChild(objetElement);
+    divImageElement.appendChild(btnCorbeille);
+    divImageElement.appendChild(imageElement);
+    objetElement.appendChild(divImageElement);
+    objetElement.appendChild(btnEditer);
+  }
+}
 }
 
 // Affichage classique
@@ -92,7 +131,7 @@ function genererObjets(objets) {
     // Récupération de l'élément du DOM qui accueillera les objets
     const sectionGallery = document.querySelector(".gallery");
     // Création de la balise figure qui englobe image et titre
-    const objetElement = document.createElement("figure")
+    const objetElement = document.createElement("figure");
     const imageElement = document.createElement("img");
     imageElement.src = article.imageUrl;
     imageElement.alt = article.title;

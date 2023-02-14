@@ -16,17 +16,20 @@
 	<script type="module" src="index.js" defer></script>
 	<script src="https://kit.fontawesome.com/d3750cfb19.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
 	<header>
-		<div class="header"><h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-		<nav>
-			<ul>
-				<li>projets</li>
-				<li>contact</li>
-				<li><a href="login.html">login</a></li>
-				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-			</ul>
-		</nav></div>
+		<div class="header">
+			<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+			<nav>
+				<ul>
+					<li>projets</li>
+					<li>contact</li>
+					<li><a href="login.html">login</a></li>
+					<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+				</ul>
+			</nav>
+		</div>
 
 	</header>
 	<main>
@@ -57,9 +60,18 @@
 			</div>
 			<div class="gallery"></div>
 		</section>
-		<aside class="modal" aria-hidden="true" role="dialog" aria-modal="false" style="display: none;"><div class="modal-wrapper js-modal-stop">
-			<button class="js-modal-close">X</button>
-			</div></aside>
+		<aside class="modal" aria-hidden="true" role="dialog" aria-modal="false" style="display: none;">
+			<div class="modal-wrapper js-modal-stop">
+				<button class="js-modal-close"><i class="fa-solid fa-xmark"></i></button>
+				<h3>Galerie Photo</h3>
+				<div class="galleryModale"></div>
+				<div class="BlocBasModale">
+					<div class="barreOmbre"></div>
+					<button class="btnAdd">Ajouter une photo</button>
+					<div class="supprimerGalerie"><a href="#">supprimer la galerie</a></div>
+				</div>
+			</div>
+		</aside>
 		<section id="contact">
 			<h2>Contact</h2>
 			<p>Vous avez un projet ? Discutons-en !</p>
