@@ -431,7 +431,7 @@ footer nav ul {
 	/* position: relative; */
 }
 
-.js-modal-close {
+.js-modal-close, .js-modal-close2 {
 	background-color: white;
 	border: white;
 	position: absolute;
