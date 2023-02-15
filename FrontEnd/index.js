@@ -52,6 +52,8 @@ boutonModifierProjets.innerHTML=`<section id="portfolio">
         <div class="blocAjoutPhoto">
             <div class="apercu">
                 <img src="assets/icons/image.png" alt="iconImage">
+                <label for="image">Ajouter Photo</label>
+                <input type="file" accept=".jpg, .png" class="parcourir">
                 <button class="parcourir">
                     + Ajouter Photo
                 </button>
@@ -62,7 +64,14 @@ boutonModifierProjets.innerHTML=`<section id="portfolio">
                     <div><label for="Title">Titre</label></div>
                     <div><input type="text" name="title" class="saisieTitre"></div>
                     <div><label for="Categorie">Catégorie</label></div>
-                    <div><input type="text" name="categorie" class="saisieCategorie"></div>
+                    <div class="pourFleche">           
+                        <select name="categorie" class="saisieCategorie">
+                          <option value="">--choisissez une catégorie--</option>
+                          <option value="1">objets</option>
+                          <option value="2">Appartements</option>
+                          <option value="3">Hôtels et restaurants</option>
+                        </select>
+                        <img src="assets/icons/flechecategorie.png" alt="flechecategorie" class = "flechecategorie">
             </div>
             <div class="barreOmbre"></div>
             <button class="valider">Valider</button>
@@ -191,7 +200,12 @@ function openModal2(e){
 const modal21 = document.querySelector(".btnAdd")
   modal21.addEventListener('click', closeModal)
   modal21.addEventListener('click', openModal2)
+
+const retourModal1 = document.querySelector('.retour-modal-1')
+  retourModal1.addEventListener('click', closeModal2)
+  retourModal1.addEventListener('click', openModal)
 }
+
 
 
 

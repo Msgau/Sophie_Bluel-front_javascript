@@ -410,7 +410,7 @@ footer nav ul {
 	width: 600px;
 	max-width: calc(100vw - 20px);
 	max-height: calc(100vh - 20px);
-	padding: 20px;
+	padding: 15px;
 	position: relative;
 }
 
@@ -490,6 +490,13 @@ footer nav ul {
 }
 
 /* Modale 2 */
+.retour-modal-1{
+	background-color: white;
+	border: white;
+}
+.fa-arrow-left{
+	font-size: 18px;
+}
 .blocAjoutPhoto{
 	display: flex;
 	flex-direction: column;
@@ -521,11 +528,13 @@ footer nav ul {
 }
 
 .saisieTitre, .saisieCategorie{
-	width: 414px;
+	width: 420px;
 	margin-top: 10px;
-	height: 46px;
+	height: 51px;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	border: none;
+	background-color: white;
+	padding: 0;
 }
 .saisieTitre{
 	margin-bottom: 21px;
@@ -541,4 +550,40 @@ footer nav ul {
 	background-color: #A7A7A7;
 	color: white;
 	font-family: 'syne', Arial, Helvetica, sans-serif;
+	margin-left: 90px;
 }
+select {
+	appearance: none;
+  }
+.pourFleche{
+	position: relative;
+}
+.flechecategorie{
+	width: 15px;
+	position: absolute;
+	right: 28px;
+	bottom: 20px;
+}
+
+/* Transformation du bouton upload */
+
+.parent-div {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+  }
+  .parent-div input[type=file] {
+    left: 0;
+    top: 0;
+    opacity: 0;
+    position: absolute;
+    font-size: 90px;
+  }
+  .btn-upload {
+    width: 237px;
+	height: 36px;
+	border-radius: 60px;
+	border: none;
+	background-color: #A7A7A7;
+	color: white;
+  }
