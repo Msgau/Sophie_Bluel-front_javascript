@@ -34,86 +34,190 @@ boutonModifierProjets.innerHTML=`<section id="portfolio">
   <button class="btnHotels">Hôtels et restaurants</button>
 </div>
 <div class="gallery"></div>
-
+<aside class="modal" aria-hidden="true" role="dialog" aria-modal="false" style="display: none;">
+			<div class="modal-wrapper js-modal-stop">
+				<button class="js-modal-close"><i class="fa-solid fa-xmark"></i></button>
+				<h3>Galerie Photo</h3>
+				<div class="galleryModale"></div>
+				<div class="BlocBasModale">
+					<div class="barreOmbre"></div>
+					<button class="btnAdd">Ajouter une photo</button>
+					<div class="supprimerGalerie"><a href="#">supprimer la galerie</a></div>
+				</div></div></aside>
+        <aside class="modal2" aria-hidden="true" role="dialog" aria-modal="false" style="display: none;">
+    <div class="modal-wrapper2 js-modal-stop2">
+        <button class="retour-modal-1"><i class="fa-solid fa-arrow-left"></i></button>
+        <button class="js-modal-close"><i class="fa-solid fa-xmark"></i></button>
+        <h3>Ajout Photo</h3>
+        <div class="blocAjoutPhoto">
+            <div class="apercu">
+                <img src="assets/icons/image.png" alt="iconImage">
+                <button class="parcourir">
+                    + Ajouter Photo
+                </button>
+                <div>jpg, png : 4mo max</div>
+            </div>
+            <div class="titreCategorie">
+                <form method="post" class="connexion" action="index.html">
+                    <div><label for="Title">Titre</label></div>
+                    <div><input type="text" name="title" class="saisieTitre"></div>
+                    <div><label for="Categorie">Catégorie</label></div>
+                    <div><input type="text" name="categorie" class="saisieCategorie"></div>
+            </div>
+            <div class="barreOmbre"></div>
+            <button class="valider">Valider</button>
+        </div>
+    </div>
+</aside>
 `
 
 // Modale
-let modal = null 
+// let modal = null 
+// let modal2 = null
+
+// function stopPropagation(e){
+//   e.stopPropagation()
+// }
+
+// function closeModal(e){
+//   if (modal === null) return
+//   e.preventDefault()
+//   modal.style.display = "none"
+//   modal.setAttribute('aria-hidden', true)
+//   modal.setAttribute('aria-modal', false)
+//   modal.removeEventListener('click', closeModal)
+//   modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)
+//   modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)
+//   modal=null
+//   // sectionGallery.innerText = "";
+// }
+
+// function openModal(e){
+//   e.preventDefault()
+//   const target = document.querySelector('.modal') 
+//   target.style.display = null
+//   target.setAttribute('aria-hidden', false)
+//   target.setAttribute('aria-modal', true)
+//   modal=target
+//   modal.addEventListener('click', closeModal)
+//   modal.querySelector('.js-modal-close').addEventListener('click', closeModal)
+//   modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
+//   document.querySelector(".galleryModale").innerHTML="";
+//   genererObjetsModale(objets);
+// }
+// window.addEventListener('keydown', function (e){
+//   if(e.key === "Escape"){
+//     closeModal(e)
+//   }
+// })
+// const modal1 = document.getElementById("modifier")
+//   modal1.addEventListener('click', openModal)
+
+// const reponseModale = await fetch('http://localhost:5678/api/works'); // On va chercher le Json
+// // const reponse = await fetch('flemme.json'); // On va chercher le Json
+// const objets = await reponseModale.json(); // On crée une const objets qu'on asssocie au résultat renvoyé par le json. Equivalent à "1ere ligne".then.pieces => pieces.json();
+// if (reponseModale.ok) {
+//     console.log(objets)
+//   }
+// // pour tous les objets, on utilise un for of. On utilise aussi une fonction gernererObjets comme ça on purra la rappeler plusieurs fois pour mettre à jour la page web
+// function genererObjetsModale(objets) {
+//   for (let i = 0; i < objets.length; i++){
+
+//     const article = objets[i];
+//     // Récupération de l'élément du DOM qui accueillera les objets
+//     const sectionGallery = document.querySelector(".galleryModale");
+//     // Création de la balise figure qui englobe image et titre
+//     const objetElement = document.createElement("figure");
+//     const divImageElement = document.createElement("div");
+//     divImageElement.className = "cadreImage"
+//     const imageElement = document.createElement("img");
+//     imageElement.src = article.imageUrl;
+//     imageElement.alt = article.title;
+//     imageElement.crossOrigin = "anonymous";
+//     const btnCorbeille = document.createElement("button")
+//     btnCorbeille.className = "corbeille"
+//     btnCorbeille.id = article.id;
+//     btnCorbeille.innerHTML = `<i class="fa-regular fa-trash-can"></i>`
+//     const btnEditer = document.createElement("div")
+//     btnEditer.className = "btnEditerModale"
+//     btnEditer.innerText = "éditer";
+//     // const titreElement = document.createElement("figcaption");
+//     // titreElement.innerText = article.title;
+
+//     sectionGallery.appendChild(objetElement);
+//     divImageElement.appendChild(btnCorbeille);
+//     divImageElement.appendChild(imageElement);
+//     objetElement.appendChild(divImageElement);
+//     objetElement.appendChild(btnEditer);
+//   }
+// }
+
+
+// function ajoutPhotoModale(){
+//   const addImgModal = document.querySelector(".modal-wrapper");
+//   addImgModal.innerHTML = 
+//   // document.querySelector(".btnAdd").removeEventListener("click", vanishModal)
+//   modal.querySelector('.retour-modal-1').addEventListener('click', openModal)
+//   modal.querySelector('.js-modal-close2').addEventListener('click', closeModal)
+// }
+
+let modal2 = null
 
 function stopPropagation(e){
   e.stopPropagation()
 }
 
-function closeModal(e){
-  console.log("jaj")
-  if (modal === null) return
+function closeModal2(e){
+  if (modal2 === null) return
   e.preventDefault()
-  modal.style.display = "none"
-  modal.setAttribute('aria-hidden', true)
-  modal.setAttribute('aria-modal', false)
-  modal.removeEventListener('click', closeModal)
-  modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)
-  modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)
-  modal=null
-  sectionGallery.innerText = "";
+  modal2.style.display = "none"
+  modal2.setAttribute('aria-hidden', true)
+  modal2.setAttribute('aria-modal', false)
+  modal2.removeEventListener('click', closeModal2)
+  modal2.querySelector('.js-modal-close2').removeEventListener('click', closeModal2)
+  modal2.querySelector('.js-modal-stop2').removeEventListener('click', stopPropagation)
+  modal2 = null
+  // sectionGallery.innerText = "";
 }
-
-function openModal(e){
-  console.log("fef")
+function openModal2(e){
   e.preventDefault()
-  const target = document.querySelector('.modal') 
+  const target = document.querySelector('.modal2') 
   target.style.display = null
   target.setAttribute('aria-hidden', false)
   target.setAttribute('aria-modal', true)
-  modal=target
-  modal.addEventListener('click', closeModal)
-  modal.querySelector('.js-modal-close').addEventListener('click', closeModal)
-  modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
-  document.querySelector(".galleryModale").innerHTML="";
-  genererObjetsModale(objets);
+  modal2=target
+  modal2.addEventListener('click', closeModal2)
+  modal2.querySelector('.js-modal-close2').addEventListener('click', closeModal2)
+  modal2.querySelector('.js-modal-stop2').addEventListener('click', stopPropagation)
+  // document.querySelector(".galleryModale").innerHTML="";
+  // ajoutPhotoModale();
 }
 
-const modal1 = document.getElementById("modifier")
-  modal1.addEventListener('click', openModal)
-
-const reponseModale = await fetch('http://localhost:5678/api/works'); // On va chercher le Json
-// const reponse = await fetch('flemme.json'); // On va chercher le Json
-const objets = await reponseModale.json(); // On crée une const objets qu'on asssocie au résultat renvoyé par le json. Equivalent à "1ere ligne".then.pieces => pieces.json();
-if (reponseModale.ok) {
-    console.log(objets)
-  }
-// pour tous les objets, on utilise un for of. On utilise aussi une fonction gernererObjets comme ça on purra la rappeler plusieurs fois pour mettre à jour la page web
-function genererObjetsModale(objets) {
-  for (let i = 0; i < objets.length; i++){
-
-    const article = objets[i];
-    // Récupération de l'élément du DOM qui accueillera les objets
-    const sectionGallery = document.querySelector(".galleryModale");
-    // Création de la balise figure qui englobe image et titre
-    const objetElement = document.createElement("figure");
-    const divImageElement = document.createElement("div");
-    divImageElement.className = "cadreImage"
-    const imageElement = document.createElement("img");
-    imageElement.src = article.imageUrl;
-    imageElement.alt = article.title;
-    imageElement.crossOrigin = "anonymous";
-    const btnCorbeille = document.createElement("button")
-    btnCorbeille.className = "corbeille"
-    btnCorbeille.innerHTML = `<i class="fa-regular fa-trash-can"></i>`
-    const btnEditer = document.createElement("div")
-    btnEditer.className = "btnEditerModale"
-    btnEditer.innerText = "editer";
-    // const titreElement = document.createElement("figcaption");
-    // titreElement.innerText = article.title;
-
-    sectionGallery.appendChild(objetElement);
-    divImageElement.appendChild(btnCorbeille);
-    divImageElement.appendChild(imageElement);
-    objetElement.appendChild(divImageElement);
-    objetElement.appendChild(btnEditer);
-  }
+// const modal21 = document.querySelector(".btnAdd")
+const modal21 = document.querySelector("#modifier")
+  // modal21.addEventListener('click', closeModal)
+  modal21.addEventListener('click', openModal2)
 }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Affichage classique
 

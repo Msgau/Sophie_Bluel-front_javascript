@@ -387,8 +387,11 @@ footer nav ul {
 
 /* Modale */
 /* https://www.youtube.com/watch?v=EIC1_0Dfa9o */
-
-.modal {
+#modifier{
+	text-decoration: none;
+	color: black;
+}
+.modal, .modal2 {
 	position: fixed;
 	display: flex;
 	align-items: center;
@@ -400,7 +403,7 @@ footer nav ul {
 	background: rgba(0, 0, 0, 0.3);
 }
 
-.modal-wrapper {
+.modal-wrapper, .modal-wrapper2 {
 	overflow: auto;
 	background-color: white;
 	border-radius: 10px;
@@ -436,7 +439,7 @@ footer nav ul {
 	top: 26px;
 }
 
-.modal-wrapper h3 {
+.modal-wrapper h3, .modal-wrapper2 h3 {
 	margin: 40px 0 46px 0;
 	text-align: center;
 	font-size: 26px;
@@ -468,12 +471,12 @@ footer nav ul {
 	width: 420px;
 	height: 0px;
 	border: 1px solid #B3B3B3;
-	margin-top: 47px;
+	margin: 47px 0 32px 0;
 	text-align: center;
 }
 
 .btnAdd {
-	margin: 38px 0 23px 0;
+	margin: 6px 0 23px 0;
 	background-color: #1D6154;
 	color: white;
 	width: 237px;
@@ -484,4 +487,58 @@ footer nav ul {
 .supprimerGalerie a {
 	text-decoration: none;
 	color: #D65353;
+}
+
+/* Modale 2 */
+.blocAjoutPhoto{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.apercu{
+	background-color: #E8F1F7;
+	width: 420px;
+	height: 169px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.apercu img{
+	width: 60px;
+	margin-bottom: 21px;
+}
+.parcourir{
+	width: 173px;
+	height: 36px;
+	border-radius: 50px;
+	background-color: #CBD6DC;
+	color: #306685;
+	font-family: 'Work Sans', Arial, Helvetica, sans-serif;
+	border: none;
+	margin-bottom: 7px;
+}
+
+.saisieTitre, .saisieCategorie{
+	width: 414px;
+	margin-top: 10px;
+	height: 46px;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	border: none;
+}
+.saisieTitre{
+	margin-bottom: 21px;
+}
+.titreCategorie{
+	margin-top: 30px;
+}
+.valider{
+	width: 237px;
+	height: 36px;
+	border-radius: 60px;
+	border: none;
+	background-color: #A7A7A7;
+	color: white;
+	font-family: 'syne', Arial, Helvetica, sans-serif;
 }
