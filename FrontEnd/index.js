@@ -52,11 +52,13 @@ boutonModifierProjets.innerHTML=`<section id="portfolio">
         <div class="blocAjoutPhoto">
             <div class="apercu">
                 <img src="assets/icons/image.png" alt="iconImage">
-                <label for="image">Ajouter Photo</label>
-                <input type="file" accept=".jpg, .png" class="parcourir">
-                <button class="parcourir">
-                    + Ajouter Photo
-                </button>
+
+                <div class="btnParcourir">
+                <label for="image"+ Ajouter Photo</label>
+                  <button class="btn-upload">+ Ajouter photo</button>
+                  <input type="file" name="upfile" accept=".jpg, .png" />
+    </div>
+
                 <div>jpg, png : 4mo max</div>
             </div>
             <div class="titreCategorie">
