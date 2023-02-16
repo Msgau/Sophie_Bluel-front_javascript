@@ -98,14 +98,7 @@ async function login() {
             // création d'un ID de commande dans le localstorage
             localStorage.setItem("token", JSON.stringify(data.token));
         })
-    // .catch((err) => {
 
-    //     const erreur = document.querySelector(".forgot");
-    //     erreur.innerHTML = "Erreur dans l’identifiant ou le mot de passe";
-    //     // console.log("POST erreur", err);
-    //     // console.log(err);
-    // })
-    // if()
     function logout() {
         localStorage.removeItem("token");
     }

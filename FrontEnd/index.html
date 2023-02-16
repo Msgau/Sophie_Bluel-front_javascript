@@ -51,7 +51,11 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<h2>Mes Projets</h2>
+			<div class="btnProjets">
+				<h2>Mes Projets</h2>
+				<div class="modifier"><i class="fa-regular fa-pen-to-square"></i> <a href="#modal1"
+						id="modifier">modifier</a></div>
+			</div>
 			<div class="filtres">
 				<button class="btnTous">Tous</button>
 				<button class="btnItems">Objets</button>
@@ -59,21 +63,70 @@
 				<button class="btnHotels">Hôtels et restaurants</button>
 			</div>
 			<div class="gallery"></div>
-		</section>
+			<aside class="modal" aria-hidden="true" role="dialog" aria-modal="false" style="display: none;">
+				<div class="modal-wrapper js-modal-stop">
+					<button class="js-modal-close"><i class="fa-solid fa-xmark"></i></button>
+					<h3>Galerie Photo</h3>
+					<div class="galleryModale"></div>
+					<div class="BlocBasModale">
+						<div class="barreOmbre"></div>
+						<button class="btnAdd">Ajouter une photo</button>
+						<div class="supprimerGalerie"><a href="#">supprimer la galerie</a></div>
+					</div>
+				</div>
+			</aside>
 
-		<section id="contact">
-			<h2>Contact</h2>
-			<p>Vous avez un projet ? Discutons-en !</p>
-			<form action="#" method="post">
-				<label for="name">Nom</label>
-				<input type="text" name="name" id="name">
-				<label for="email">Email</label>
-				<input type="email" name="email" id="email">
-				<label for="message">Message</label>
-				<textarea name="message" id="message" cols="30" rows="10"></textarea>
-				<input type="submit" value="Envoyer">
-			</form>
-		</section>
+			<aside class="modal2" aria-hidden="true" role="dialog" aria-modal="false" style="display: none;">
+				<div class="modal-wrapper2 js-modal-stop2">
+					<button class="retour-modal-1"><i class="fa-solid fa-arrow-left"></i></button>
+					<button class="js-modal-close2"><i class="fa-solid fa-xmark"></i></button>
+					<h3>Ajout Photo</h3>
+					<div class="blocAjoutPhoto">
+						<div class="apercu">
+							<img src="assets/icons/image.png" alt="iconImage">
+
+							<div class="btnParcourir">
+								<input type="file" name="upfile" accept=".jpg, .png" id="imageUp" hidden/>
+								<label for="imageUp">+ Ajouter photo</label>
+							</div>
+							<div id="restrictions">jpg, png : 4mo max</div>
+							<div id="fenetreApercu"></div>
+						</div>
+						<div class="titreCategorie">
+							<form method="post" class="connexion" action="index.html">
+								<div><label for="Title">Titre</label></div>
+								<div><input type="text" name="title" class="saisieTitre"></div>
+								<div><label for="Categorie">Catégorie</label></div>
+								<div class="pourFleche">
+									<select name="categorie" class="saisieCategorie">
+										<option value="">--choisissez une catégorie--</option>
+										<option value="1">objets</option>
+										<option value="2">Appartements</option>
+										<option value="3">Hôtels et restaurants</option>
+									</select>
+								</div>
+							</form>
+							<img src="assets/icons/flechecategorie.png" alt="flechecategorie" class="flechecategorie">
+						</div>
+						<div class="barreOmbre"></div>
+						<button class="valider">Valider</button>
+					</div>
+				</div>
+			</aside>
+
+			<section id="contact">
+				<h2>Contact</h2>
+				<p>Vous avez un projet ? Discutons-en !</p>
+				<form action="#" method="post">
+					<label for="name">Nom</label>
+					<input type="text" name="name" id="name">
+					<label for="email">Email</label>
+					<input type="email" name="email" id="email">
+					<label for="message">Message</label>
+					<textarea name="message" id="message" cols="30" rows="10"></textarea>
+					<input type="submit" value="Envoyer">
+				</form>
+			</section>
 	</main>
 
 	<footer>

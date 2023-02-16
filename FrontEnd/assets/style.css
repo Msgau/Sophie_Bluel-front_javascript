@@ -512,10 +512,6 @@ footer nav ul {
 	justify-content: center;
 	align-items: center;
 }
-.apercu img{
-	width: 60px;
-	margin-bottom: 21px;
-}
 .boutonParcourir{
 	width: 173px;
 	height: 36px;
@@ -567,48 +563,37 @@ select {
 }
 
 /* Transformation du bouton upload */
+/* Avant tout, ajouter l'attribu hidden à la balise input */
 
-.btnParcourir {
-    display: inline-block;
-    position: relative;
-    overflow: hidden;
-  }
-  .btnParcourir input[type=file] {
-    left: 0;
-    top: 0;
-    opacity: 0;
-    position: absolute;
-    font-size: 90px;
-  }
-  .parcourir {
-	margin: 500px 0 0 40px;
-	padding-top: 50px;
-	border-radius: 60px;
-	border: none;
-	color: #306685;
-  }
-.inputImage{
-	max-width: 173px;
-	max-height: 36px;
-}
-
-.parent-div {
-    display: inline-block;
-    position: relative;
-    overflow: hidden;
-  }
-  .parent-div input[type=file] {
-    left: 0;
-    top: 0;
-    opacity: 0;
-    position: absolute;
-    font-size: 90px;
-  }
-  .btn-upload {
-    width: 237px;
-	height: 36px;
-	border-radius: 60px;
-	border: none;
+label[for="imageUp"]{ /* Permet de sélectionner le bouton à mettre en forme */
+	display: flex; /* Permet de centrer la mise en page et de le moduler avec des width height et de garder les autres div à distance */
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
 	background-color: #CBD6DC;
 	color: #306685;
+	width: 173px;
+	height: 36px;
+	border-radius: 60px;
+	margin-bottom: 7px;
+	transition-duration: 0.5s;
+  }
+  label[for="imageUp"]:hover{ /* Permet de sélectionner le bouton à mettre en forme */
+	background-color: #1D6154;
+	color: white;
+  }
+  #restrictions{
+	color: #444444;
+  }
+#fenetreApercu, #imageSelected{
+	height: 169px;
+	width: 420px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+  #fenetreApercu img{
+	object-fit: cover;
+	margin: 0;
+	height: 169px;
   }

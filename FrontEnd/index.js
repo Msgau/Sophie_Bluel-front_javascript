@@ -24,63 +24,7 @@ divModifierPP.innerHTML=`<i class="fa-regular fa-pen-to-square"></i> modifier`
 boutonModifierPP.appendChild(divModifierPP);
 // Bouton modifier projets
 const boutonModifierProjets = document.querySelector("#portfolio");
-boutonModifierProjets.innerHTML=`<section id="portfolio">
-<div class="btnProjets"><h2>Mes Projets</h2>
-<div class="modifier"><i class="fa-regular fa-pen-to-square"></i> <a href="#modal1" id="modifier">modifier</a></div></div>
-<div class="filtres">
-  <button class="btnTous">Tous</button>
-  <button class="btnItems">Objets</button>
-  <button class="btnAppartements">Appartements</button>
-  <button class="btnHotels">Hôtels et restaurants</button>
-</div>
-<div class="gallery"></div>
-<aside class="modal" aria-hidden="true" role="dialog" aria-modal="false" style="display: none;">
-			<div class="modal-wrapper js-modal-stop">
-				<button class="js-modal-close"><i class="fa-solid fa-xmark"></i></button>
-				<h3>Galerie Photo</h3>
-				<div class="galleryModale"></div>
-				<div class="BlocBasModale">
-					<div class="barreOmbre"></div>
-					<button class="btnAdd">Ajouter une photo</button>
-					<div class="supprimerGalerie"><a href="#">supprimer la galerie</a></div>
-				</div></div></aside>
-        <aside class="modal2" aria-hidden="true" role="dialog" aria-modal="false" style="display: none;">
-    <div class="modal-wrapper2 js-modal-stop2">
-        <button class="retour-modal-1"><i class="fa-solid fa-arrow-left"></i></button>
-        <button class="js-modal-close2"><i class="fa-solid fa-xmark"></i></button>
-        <h3>Ajout Photo</h3>
-        <div class="blocAjoutPhoto">
-            <div class="apercu">
-                <img src="assets/icons/image.png" alt="iconImage">
-
-                <div class="btnParcourir">
-                <label for="image"+ Ajouter Photo</label>
-                  <button class="btn-upload">+ Ajouter photo</button>
-                  <input type="file" name="upfile" accept=".jpg, .png" />
-    </div>
-
-                <div>jpg, png : 4mo max</div>
-            </div>
-            <div class="titreCategorie">
-                <form method="post" class="connexion" action="index.html">
-                    <div><label for="Title">Titre</label></div>
-                    <div><input type="text" name="title" class="saisieTitre"></div>
-                    <div><label for="Categorie">Catégorie</label></div>
-                    <div class="pourFleche">           
-                        <select name="categorie" class="saisieCategorie">
-                          <option value="">--choisissez une catégorie--</option>
-                          <option value="1">objets</option>
-                          <option value="2">Appartements</option>
-                          <option value="3">Hôtels et restaurants</option>
-                        </select>
-                        <img src="assets/icons/flechecategorie.png" alt="flechecategorie" class = "flechecategorie">
-            </div>
-            <div class="barreOmbre"></div>
-            <button class="valider">Valider</button>
-        </div>
-    </div>
-</aside>
-`
+// boutonModifierProjets.innerHTML=` Insérer ici le html terminé`
 
 // Modale
 let modal = null 
@@ -163,16 +107,6 @@ function genererObjetsModale(objets) {
   }
 }
 
-
-// function ajoutPhotoModale(){
-//   const addImgModal = document.querySelector(".modal-wrapper");
-//   addImgModal.innerHTML = 
-//   // document.querySelector(".btnAdd").removeEventListener("click", vanishModal)
-//   modal.querySelector('.retour-modal-1').addEventListener('click', openModal)
-//   modal.querySelector('.js-modal-close2').addEventListener('click', closeModal)
-// }
-
-
 function closeModal2(e){
   if (modal2 === null) return
   e.preventDefault()
@@ -206,6 +140,67 @@ const modal21 = document.querySelector(".btnAdd")
 const retourModal1 = document.querySelector('.retour-modal-1')
   retourModal1.addEventListener('click', closeModal2)
   retourModal1.addEventListener('click', openModal)
+
+  // Fonction pour aperçu
+
+const ciblerImage = document.querySelector('#imageUp');
+ciblerImage.addEventListener('change', previewFile);
+function previewFile(){
+  const verificationExtension = /\.(jpe?g|png)$/i; // Permet // de n'autoriser que les jpeg, jpg et png
+  if(this.files.length === 0 || !verificationExtension.test(this.files[0].name)){ // Si il  n'y a pas de fichier, ou si verificationExtension teste le nom du fichier et que ça renvoie false (ou inversement si on elève le !) ne pas executer le code après
+    console.log("fef")
+    return
+  }
+
+  // const sectionGallery = document.querySelector(".gallery");
+  // const vanishApercu = document.querySelector('.apercu');
+  // // Création de la balise figure qui englobe image et titre
+  // const objetElement = document.createElement("figure");
+  // const divApercu = document.createElement("div");
+  // const imageElement = document.createElement("img");
+  // imageElement.src = article.imageUrl;
+
+  // sectionGallery.appendChild(objetElement);
+  // objetElement.appendChild(imageElement);
+  // objetElement.appendChild(titreElement);
+
+
+   const vanishApercu = document.querySelector('.apercu');
+   vanishApercu.innerText = "";
+   const divApercu = document.createElement("div");
+   divApercu.id = "fenetreApercu";
+  vanishApercu.appendChild(divApercu)
+
+  const file = this.files[0];
+
+  const fileReader = new FileReader(); //
+
+  fileReader.readAsDataURL(file);
+
+  fileReader.addEventListener('load', (event) => displayImage(event, file));
+
+  function displayImage(event, file){
+    const figureElement = document.createElement('figure')
+    figureElement.id = "imageSelected";
+    const imageElement = document.createElement('img')
+    imageElement.src = event.target.result;
+
+    const figcaptionElement = document.createElement('figcaption')
+    figcaptionElement.textContent = `fichier selectionné : ${file.name}`
+
+    figureElement.appendChild(imageElement)
+
+    document.querySelector('#fenetreApercu').appendChild(figureElement);
+  }
+
+
+  // const fenetreApercu = document.querySelector('#fenetreApercu');
+  // const apercuElement = document.createElement("img");
+  // apercuElement.src= file.imageUrl
+
+
+}
+
 }
 
 
