@@ -577,6 +577,7 @@ label[for="imageUp"]{ /* Permet de sélectionner le bouton à mettre en forme */
 	border-radius: 60px;
 	margin-bottom: 7px;
 	transition-duration: 0.5s;
+	margin-top: 20px;
   }
   label[for="imageUp"]:hover{ /* Permet de sélectionner le bouton à mettre en forme */
 	background-color: #1D6154;
@@ -585,7 +586,7 @@ label[for="imageUp"]{ /* Permet de sélectionner le bouton à mettre en forme */
   #restrictions{
 	color: #444444;
   }
-#fenetreApercu, #imageSelected{
+#imageSelected{
 	height: 169px;
 	width: 420px;
 	display: flex;

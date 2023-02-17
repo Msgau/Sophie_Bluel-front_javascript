@@ -1,5 +1,7 @@
+import { ajouterImage, supprimerImage} from "./modifierDom.js";
 
 // Affichage admin
+
 if (localStorage.getItem("token") != null && localStorage.getItem("token") != "undefined"){
   // Header admin
   const top = document.querySelector("header");
@@ -49,6 +51,7 @@ function closeModal(e){
 
 function openModal(e){
   e.preventDefault()
+  supprimerImage();
   const target = document.querySelector('.modal') 
   target.style.display = null
   target.setAttribute('aria-hidden', false)
@@ -90,7 +93,8 @@ function genererObjetsModale(objets) {
     imageElement.alt = article.title;
     imageElement.crossOrigin = "anonymous";
     const btnCorbeille = document.createElement("button")
-    btnCorbeille.className = "corbeille"
+    btnCorbeille.className = `corbeille `+ [i + 1]
+    btnCorbeille.dataset.id = article.id;
     btnCorbeille.id = article.id;
     btnCorbeille.innerHTML = `<i class="fa-regular fa-trash-can"></i>`
     const btnEditer = document.createElement("div")
@@ -121,6 +125,7 @@ function closeModal2(e){
 }
 function openModal2(e){
   e.preventDefault()
+  ajouterImage();
   const target = document.querySelector('.modal2') 
   target.style.display = null
   target.setAttribute('aria-hidden', false)
@@ -129,8 +134,6 @@ function openModal2(e){
   modal2.addEventListener('click', closeModal2)
   modal2.querySelector('.js-modal-close2').addEventListener('click', closeModal2)
   modal2.querySelector('.js-modal-stop2').addEventListener('click', stopPropagation)
-  // document.querySelector(".galleryModale").innerHTML="";
-  // ajoutPhotoModale();
 }
 
 const modal21 = document.querySelector(".btnAdd")
@@ -151,19 +154,6 @@ function previewFile(){
     console.log("fef")
     return
   }
-
-  // const sectionGallery = document.querySelector(".gallery");
-  // const vanishApercu = document.querySelector('.apercu');
-  // // Création de la balise figure qui englobe image et titre
-  // const objetElement = document.createElement("figure");
-  // const divApercu = document.createElement("div");
-  // const imageElement = document.createElement("img");
-  // imageElement.src = article.imageUrl;
-
-  // sectionGallery.appendChild(objetElement);
-  // objetElement.appendChild(imageElement);
-  // objetElement.appendChild(titreElement);
-
 
    const vanishApercu = document.querySelector('.apercu');
    vanishApercu.innerText = "";
@@ -193,29 +183,9 @@ function previewFile(){
     document.querySelector('#fenetreApercu').appendChild(figureElement);
   }
 
-
-  // const fenetreApercu = document.querySelector('#fenetreApercu');
-  // const apercuElement = document.createElement("img");
-  // apercuElement.src= file.imageUrl
-
-
 }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

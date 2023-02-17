@@ -82,18 +82,19 @@
 					<button class="js-modal-close2"><i class="fa-solid fa-xmark"></i></button>
 					<h3>Ajout Photo</h3>
 					<div class="blocAjoutPhoto">
-						<div class="apercu">
-							<img src="assets/icons/image.png" alt="iconImage">
+						<form method="post" class="connexion" action="index.html">
+							<div class="apercu">
+								<img src="assets/icons/image.png" alt="iconImage">
 
-							<div class="btnParcourir">
-								<input type="file" name="upfile" accept=".jpg, .png" id="imageUp" hidden/>
-								<label for="imageUp">+ Ajouter photo</label>
+								<div class="btnParcourir">
+									<input type="file" name="upfile" accept=".jpg, .png" id="imageUp" hidden />
+									<label for="imageUp">+ Ajouter photo</label>
+								</div>
+								<div id="restrictions">jpg, png : 4mo max</div>
+								<div id="fenetreApercu"></div>
 							</div>
-							<div id="restrictions">jpg, png : 4mo max</div>
-							<div id="fenetreApercu"></div>
-						</div>
-						<div class="titreCategorie">
-							<form method="post" class="connexion" action="index.html">
+							<div class="titreCategorie">
+
 								<div><label for="Title">Titre</label></div>
 								<div><input type="text" name="title" class="saisieTitre"></div>
 								<div><label for="Categorie">Catégorie</label></div>
@@ -105,11 +106,12 @@
 										<option value="3">Hôtels et restaurants</option>
 									</select>
 								</div>
-							</form>
-							<img src="assets/icons/flechecategorie.png" alt="flechecategorie" class="flechecategorie">
-						</div>
-						<div class="barreOmbre"></div>
-						<button class="valider">Valider</button>
+								<img src="assets/icons/flechecategorie.png" alt="flechecategorie"
+									class="flechecategorie">
+							</div>
+							<div class="barreOmbre"></div>
+							<button class="valider">Valider</button>
+						</form>
 					</div>
 				</div>
 			</aside>
