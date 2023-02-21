@@ -1,16 +1,8 @@
-import { ajouterImage, supprimerImage } from "./modifierDom.js";
+// import { ajouterImage, supprimerImage } from "./modifierDom.js";
 
 // Affichage admin
-const str = 'Hello World';
-const textToBinary = (str = '') => {
-  let res = '';
-  res = str.split('').map(char => {
-    return char.charCodeAt(0).toString(2);
-  }).join(' ');
-  return res;
-};
-console.log(textToBinary('Hello World'));
-if (localStorage.getItem("token") != null && localStorage.getItem("token") != "undefined") {
+
+if (localStorage.getItem("token") != null && localStorage.getItem("token") != "undefined"){
   // Header admin
   const top = document.querySelector("header");
   const BlackString = document.createElement("div");
@@ -99,7 +91,7 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
       const imageElement = document.createElement("img");
       imageElement.src = article.imageUrl;
       imageElement.alt = article.title;
-      imageElement.crossOrigin = "anonymous";
+      // imageElement.crossOrigin = "anonymous";
       const btnCorbeille = document.createElement("button")
       btnCorbeille.className = `corbeille_` + [i] + ` trash`
       btnCorbeille.dataset.id = [i];
@@ -117,7 +109,8 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
       objetElement.appendChild(divImageElement);
       objetElement.appendChild(btnEditer);
 
-      let bearerToken = localStorage.getItem("token")
+      function deleteAll(){
+        const bearerToken = localStorage.getItem("token")
       // Le machin qui supprime{
         fetch(`http://localhost:5678/api/works/${i}`, {
         method: "DELETE",
@@ -126,6 +119,9 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
           "Authorization": `Bearer ${bearerToken}`
         }
       });
+      }
+      const boutonDel = document.getElementById("supprimerGalerie");
+      boutonDel.addEventListener("click", deleteAll);
       // const recupererId = document.querySelector(`.corbeille_0`)
       // recupererId.addEventListener('click', delete)
 
@@ -146,7 +142,7 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
   }
   function openModal2(e) {
     e.preventDefault()
-    ajouterImage();
+    // ajouterImage();
     const target = document.querySelector('.modal2')
     target.style.display = null
     target.setAttribute('aria-hidden', false)
@@ -235,7 +231,7 @@ function genererObjets(objets) {
     const imageElement = document.createElement("img");
     imageElement.src = article.imageUrl;
     imageElement.alt = article.title;
-    imageElement.crossOrigin = "anonymous";
+    // imageElement.crossOrigin = "anonymous";
     const titreElement = document.createElement("figcaption");
     titreElement.innerText = article.title;
 

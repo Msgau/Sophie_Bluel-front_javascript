@@ -40,56 +40,53 @@ export function ajouterImage() {
 
 
 
+// export function supprimerImage(imageId) {
+//     console.log(imageId)
+//     // const getToken = localStorage.getItem("token")
+//     // console.log(getToken)
 
 
-
-export function supprimerImage(imageId) {
-    console.log(imageId)
-    // const getToken = localStorage.getItem("token")
-    // console.log(getToken)
-
-
-    const recupererId = document.querySelectorAll(`.corbeille_`)
-    recupererId[i].addEventListener("click", function(e){
-        console.log(recupererId[i])
+//     const recupererId = document.querySelectorAll(`.corbeille_`)
+//     recupererId[i].addEventListener("click", function(e){
+//         console.log(recupererId[i])
 
 
 
 
-        e.preventDefault();
-        const reponse = fetch(`http://localhost:5678/api/works/${id}`{
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${getitem}`
-            }
-        });
+//         e.preventDefault();
+//         const reponse = fetch(`http://localhost:5678/api/works/${id}`{
+//             method: "DELETE",
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 "Authorization": `Bearer ${getitem}`
+//             }
+//         });
 
-    if (reponse.ok) {
-        console.log("Travail supprimé");
-    }
-    else {
-        console.log("err")
-    }
-    })
-    const creerIdBtn = document.querySelectorAll(".galleryModale figure div button") // On chope tous les boutons
+//     if (reponse.ok) {
+//         console.log("Travail supprimé");
+//     }
+//     else {
+//         console.log("err")
+//     }
+//     })
+//     const creerIdBtn = document.querySelectorAll(".galleryModale figure div button") // On chope tous les boutons
 
-        creerIdBtn[i].addEventListener("click", function(event)){ // On écoute tous les boutons
-            e.preventDefault();
-
-
-
-            const id = event.target.dataset.id; // On récupère la valeur de l'attribu dataId à l'aidde de la propriété dataset qu'on a créé lors de la création du bouton dans index.js
-            const reponse = fetch (`http://localhost:5678/api/works/${id}`{
-                method : "DELETE"
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${getitem}`
-                }
-            });
+//         creerIdBtn[i].addEventListener("click", function(event)){ // On écoute tous les boutons
+//             e.preventDefault();
 
 
-        } 
+
+//             const id = event.target.dataset.id; // On récupère la valeur de l'attribu dataId à l'aidde de la propriété dataset qu'on a créé lors de la création du bouton dans index.js
+//             const reponse = fetch (`http://localhost:5678/api/works/${id}`{
+//                 method : "DELETE"
+//                 headers: {
+//                     "Content-Type": "application/json",
+//                     "Authorization": `Bearer ${getitem}`
+//                 }
+//             });
 
 
-    }
+//         } 
+
+
+//     }
