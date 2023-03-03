@@ -1,24 +1,25 @@
-// import { ajouterImage, supprimerImage } from "./modifierDom.js";
+import { deleteOne, ajouterImage } from "./modifierDom.js";
 
 // Affichage admin
 
-if (localStorage.getItem("token") != null && localStorage.getItem("token") != "undefined"){
+if (localStorage.getItem("token") != null && localStorage.getItem("token") != "undefined") {
   // Header admin
   const top = document.querySelector("header");
-  const BlackString = document.createElement("div");
-  BlackString.id = "blackString";
-  BlackString.innerHTML = `<p><a href="#" class="edition"><i class="fa-regular fa-pen-to-square"></i>   Mode édition</a></p>
+  const bandeauNoir = document.createElement("div");
+  bandeauNoir.id = "bandeauNoir";
+  bandeauNoir.innerHTML = `<p><a href="#" class="edition"><i class="fa-regular fa-pen-to-square"></i>   Mode édition</a></p>
   <p class="changement"><a href="#" class="Achangement">publier les changements</a></p>`
-  const Boutonlogout = document.querySelector("nav ul li a");
-  Boutonlogout.href = "index.html";
-  Boutonlogout.id = "sortie";
-  Boutonlogout.innerHTML = "logout";
-  top.appendChild(BlackString);
+  const boutonLogout = document.querySelector("nav ul li a");
+  boutonLogout.href = "index.html";
+  boutonLogout.id = "sortie";
+  boutonLogout.innerHTML = "logout";
+  top.appendChild(bandeauNoir);
+  
   //Fonction logout
   function logout() {
     localStorage.removeItem("token");
   }
-  Boutonlogout.addEventListener("click", logout)
+  boutonLogout.addEventListener("click", logout)
   // Bouton modifier PP
   const boutonModifierPP = document.querySelector("main figure");
   const divModifierPP = document.createElement("div");
@@ -26,19 +27,19 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
   divModifierPP.innerHTML = `<i class="fa-regular fa-pen-to-square"></i> modifier`
   boutonModifierPP.appendChild(divModifierPP);
   // Bouton modifier projets
-  const boutonModifierProjets = document.querySelector("#portfolio");
+  // const boutonModifierProjets = document.querySelector("#portfolio");
   // boutonModifierProjets.innerHTML=` Insérer ici le html terminé`
 
   // Modale
-  let modal = null
-  let modal2 = null
+  let modal = null;
+  let modal2 = null;
 
   function stopPropagation(e) {
     e.stopPropagation()
   }
 
   function closeModal(e) {
-    if (modal === null) return
+    if (modal === null) return;
     e.preventDefault()
     modal.style.display = "none"
     modal.setAttribute('aria-hidden', true)
@@ -52,7 +53,6 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
 
   function openModal(e) {
     e.preventDefault()
-    // supprimerImage();
     const target = document.querySelector('.modal')
     target.style.display = null
     target.setAttribute('aria-hidden', false)
@@ -63,6 +63,7 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
     modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
     document.querySelector(".galleryModale").innerHTML = "";
     genererObjetsModale(objets);
+    deleteOne();
   }
   window.addEventListener('keydown', function (e) {
     if (e.key === "Escape") {
@@ -77,7 +78,7 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
   if (reponseModale.ok) {
     console.log(objets)
   }
-  // pour tous les objets, on utilise un for of. On utilise aussi une fonction gernererObjets comme ça on purra la rappeler plusieurs fois pour mettre à jour la page web
+  // pour tous les objets, on utilise un for of. On utilise aussi une fonction gernererObjets comme ça on pourra la rappeler plusieurs fois pour mettre à jour la page web
   function genererObjetsModale(objets) {
     for (let i = 0; i < objets.length; i++) {
 
@@ -91,10 +92,8 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
       const imageElement = document.createElement("img");
       imageElement.src = article.imageUrl;
       imageElement.alt = article.title;
-      // imageElement.crossOrigin = "anonymous";
       const btnCorbeille = document.createElement("button")
       btnCorbeille.className = `corbeille_` + [i] + ` trash`
-      btnCorbeille.dataset.id = [i];
       btnCorbeille.id = article.id;
       btnCorbeille.innerHTML = `<i class="fa-regular fa-trash-can"></i>`
       const btnEditer = document.createElement("div")
@@ -109,24 +108,31 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
       objetElement.appendChild(divImageElement);
       objetElement.appendChild(btnEditer);
 
-      function deleteAll(){
+      // console.log(`.corbeille_` + [i] + ` trash`)
+      // console.log(objets[i].id)
+      
+      
+      function deleteAll() {
         const bearerToken = localStorage.getItem("token")
-      // Le machin qui supprime{
-        fetch(`http://localhost:5678/api/works/${i}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${bearerToken}`
-        }
-      });
+        // Le machin qui supprime
+        fetch(`http://localhost:5678/api/works/0`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${bearerToken}`
+          }
+        });
       }
       const boutonDel = document.getElementById("supprimerGalerie");
       boutonDel.addEventListener("click", deleteAll);
+
       // const recupererId = document.querySelector(`.corbeille_0`)
       // recupererId.addEventListener('click', delete)
 
     }
   }
+
+
 
   function closeModal2(e) {
     if (modal2 === null) return
@@ -142,7 +148,9 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
   }
   function openModal2(e) {
     e.preventDefault()
-    // ajouterImage();
+    ajouterImage();
+    // fetchPostWork();
+    // addWork();
     const target = document.querySelector('.modal2')
     target.style.display = null
     target.setAttribute('aria-hidden', false)
@@ -173,7 +181,7 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
     }
 
     const vanishApercu = document.querySelector('.apercu');
-    vanishApercu.innerText = "";
+    // vanishApercu.innerText = "";
     const divApercu = document.createElement("div");
     divApercu.id = "fenetreApercu";
     vanishApercu.appendChild(divApercu)
@@ -199,13 +207,8 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
 
       document.querySelector('#fenetreApercu').appendChild(figureElement);
     }
-
   }
-
 }
-
-
-
 
 
 
@@ -214,10 +217,9 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
 // Affichage classique
 
 const reponse = await fetch('http://localhost:5678/api/works'); // On va chercher le Json
-// const reponse = await fetch('flemme.json'); // On va chercher le Json
 const objets = await reponse.json(); // On crée une const objets qu'on asssocie au résultat renvoyé par le json. Equivalent à "1ere ligne".then.pieces => pieces.json();
 if (reponse.ok) {
-  console.log(objets)
+  console.log("L'équipe est OK")
 }
 // pour tous les objets, on utilise un for of. On utilise aussi une fonction gernererObjets comme ça on purra la rappeler plusieurs fois pour mettre à jour la page web
 function genererObjets(objets) {
@@ -231,7 +233,6 @@ function genererObjets(objets) {
     const imageElement = document.createElement("img");
     imageElement.src = article.imageUrl;
     imageElement.alt = article.title;
-    // imageElement.crossOrigin = "anonymous";
     const titreElement = document.createElement("figcaption");
     titreElement.innerText = article.title;
 

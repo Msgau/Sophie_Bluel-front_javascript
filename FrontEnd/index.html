@@ -82,12 +82,12 @@
 					<button class="js-modal-close2"><i class="fa-solid fa-xmark"></i></button>
 					<h3>Ajout Photo</h3>
 					<div class="blocAjoutPhoto">
-						<form method="post" class="connexion" action="index.html">
+						<form id="connexion">
 							<div class="apercu">
 								<img src="assets/icons/image.png" alt="iconImage">
 
 								<div class="btnParcourir">
-									<input type="file" name="upfile" accept=".jpg, .png" id="imageUp" hidden />
+									<input type="file" name="image" accept=".jpg, .png" id="imageUp" hidden />
 									<label for="imageUp">+ Ajouter photo</label>
 								</div>
 								<div id="restrictions">jpg, png : 4mo max</div>
@@ -97,9 +97,9 @@
 
 								<div><label for="Title">Titre</label></div>
 								<div><input type="text" name="title" class="saisieTitre"></div>
-								<div><label for="Categorie">Catégorie</label></div>
+								<div><label for="Category">Catégorie</label></div>
 								<div class="pourFleche">
-									<select name="categorie" class="saisieCategorie">
+									<select name="category" class="saisieCategorie">
 										<option value="">--choisissez une catégorie--</option>
 										<option value="1">objets</option>
 										<option value="2">Appartements</option>

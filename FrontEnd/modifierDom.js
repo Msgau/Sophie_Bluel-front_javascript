@@ -1,42 +1,40 @@
 export async function ajouterImage() {
-
-    console.log("ajouter image")
+    try {
     const getToken = localStorage.getItem("token")
-    const formulaireImageUp = document.querySelector(".connexion");
-    formulaireImageUp.addEventListener("submit", function (event) {
-        event.preventDefault();
-        // Convertir le nom de l'image en binaire
-        // const imageBinary = querySelector("[name=upfile]")
-        // const textToBinary = (imageBinary = '') => {
-        //     let res = '';
-        //     res = imageBinary.split('').map(char => {
-        //         return char.charCodeAt(0).toString(2);
-        //     }).join(' ');
-        //     return res;
-        // };
-        // console.log(textToBinary(imageBinary));
-        // console.log(imageBinary.value);
-        const lectureImage = document.querySelector("name=upfile")
-        
-        const image = {
-            image: event.target.querySelector("[name=upfile]").value, // La propriété value contient la valeur saisie par l'utilisateur sur la page web
-            // image: imageBinary.value
-            title: event.target.querySelector("[name=title]").value,
-            category: event.target.querySelector("[name=categorie]").value
-        }
-        const chargeUtile = JSON.stringify(image);
-        console.log(chargeUtile)
+    const formulaireImageUp = document.getElementById("connexion");
 
-        await fetch("http://localhost:5678/api/works", {
+        formulaireImageUp.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const inputFile = document.querySelector("#imageUp")
+            if (inputFile.files[0].size < 4000000) {
+            const formData = new FormData(formulaireImageUp);
+            const datas = {}
+            for (const pair of formData.entries()) {
+              datas[pair[0]] = pair[1]
+            }
+            console.log(formData)
+            const chargeUtile = JSON.stringify(formData)
+
+        const response = await fetch("http://localhost:5678/api/works", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${getToken}`
             },
             body: chargeUtile
-        });
-    });
+        })
+        await response.json() 
+}});
 }
+ 
+catch (err) {
+    console.log('Une erreur est survenue',err)
+  }
+}
+
+
+
+
 
 
 export async function fetchPostWork(formData) {
@@ -88,9 +86,9 @@ export function addWork() {
 export function deleteOne(){
     const imagesElements = document.querySelectorAll(".trash");
     const bearerToken = localStorage.getItem("token")
-    for (let i=0; i < imagesElements.length; i++){
+    for (let i = 0; i < imagesElements.length; i++){
       imagesElements[i].addEventListener("click", function(event){
-        const id = event.target.dataset.id;
+        const id = imagesElements[i].id;
         console.log(id)
         fetch(`http://localhost:5678/api/works/${id}`, {
           method: "DELETE",
@@ -99,8 +97,7 @@ export function deleteOne(){
             "Authorization": `Bearer ${bearerToken}`
           }})
       })
-    }
-  }
+    }}
 
 // export function deleteOne(){
 //     const imagesElements = document.querySelectorAll(".trash");

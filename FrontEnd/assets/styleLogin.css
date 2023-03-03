@@ -82,6 +82,7 @@ input{
 }
 .forgot{
     text-decoration: underline;
+	align-items: center;
 }
 .forgot a{
     text-decoration: none;

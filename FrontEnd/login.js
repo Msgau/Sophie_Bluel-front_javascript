@@ -16,7 +16,8 @@ async function login() {
             // récupération de la commande dans la console
             console.log(data);
             // création d'un ID de commande dans le localstorage
-            localStorage.setItem("token", JSON.stringify(data.token));
+            // localStorage.setItem("token", JSON.stringify(data.token));
+            localStorage.setItem("token", JSON.stringify(data.token).substring(1, JSON.stringify(data.token).length-1));
             console.log("token " + localStorage.getItem('token'))
         })
 
