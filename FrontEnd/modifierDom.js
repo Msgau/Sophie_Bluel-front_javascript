@@ -1,84 +1,31 @@
-export async function ajouterImage() {
-    try {
+export function ajouterImage() {
+  try {
     const getToken = localStorage.getItem("token")
     const formulaireImageUp = document.getElementById("connexion");
 
-        formulaireImageUp.addEventListener('submit', async function(event) {
-            event.preventDefault();
-            const inputFile = document.querySelector("#imageUp")
-            if (inputFile.files[0].size < 4000000) {
-            const formData = new FormData(formulaireImageUp);
-            const datas = {}
-            for (const pair of formData.entries()) {
-              datas[pair[0]] = pair[1]
-            }
-            console.log(formData)
-            const chargeUtile = JSON.stringify(formData)
-
-        const response = await fetch("http://localhost:5678/api/works", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${getToken}`
-            },
-            body: chargeUtile
-        })
-        await response.json() 
-}});
-}
- 
-catch (err) {
-    console.log('Une erreur est survenue',err)
-  }
-}
-
-
-
-
-
-
-export async function fetchPostWork(formData) {
-    const bearerToken = localStorage.getItem("token")
-    try {
-      const response = await fetch("http://localhost:5678/api/works",{
-        method: "POST",
-        headers: {
-          'authorization': `Bearer ${bearerToken}`,
-          'accept':'application/json',
-        },
-        body: formData   
-      })
-      const rep = await response.json() 
-        resetAll()
-        addWorkWindow.style.display="none" 
-    } catch (err) {
-      console.log('Une erreur est survenue',err)
-    }
-  }
-
-export function addWork() { 
-    const postForm = document.querySelector("[name=upfile]")
-    postForm.addEventListener("submit",(e)=> {
-      e.preventDefault()
+    formulaireImageUp.addEventListener('submit', function (event) {
+      event.preventDefault();
+      const inputFile = document.querySelector("#imageUp")
       if (inputFile.files[0].size < 4000000) {
-        const formData = new FormData(postForm)
-        fetchPostWork(formData)
+        const formData = new FormData(formulaireImageUp);
+        console.log(formData)
+        // const chargeUtile = JSON.stringify(formData)
+
+          fetch("http://localhost:5678/api/works", {
+          method: "POST",
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "Authorization": `Bearer ${getToken}`
+          },
+          body: formData
+        })
       }
-    }) 
+    });
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
+  catch (err) {
+    console.log('Une erreur est survenue', err)
+  }
+}
 
 
 
@@ -88,6 +35,7 @@ export function deleteOne(){
     const bearerToken = localStorage.getItem("token")
     for (let i = 0; i < imagesElements.length; i++){
       imagesElements[i].addEventListener("click", function(event){
+        event.preventDefault();
         const id = imagesElements[i].id;
         console.log(id)
         fetch(`http://localhost:5678/api/works/${id}`, {

@@ -87,7 +87,7 @@
 								<img src="assets/icons/image.png" alt="iconImage">
 
 								<div class="btnParcourir">
-									<input type="file" name="image" accept=".jpg, .png" id="imageUp" hidden />
+									<input type="file" name="image" accept=".jpg, .png" id="imageUp" hidden required />
 									<label for="imageUp">+ Ajouter photo</label>
 								</div>
 								<div id="restrictions">jpg, png : 4mo max</div>
@@ -96,10 +96,10 @@
 							<div class="titreCategorie">
 
 								<div><label for="Title">Titre</label></div>
-								<div><input type="text" name="title" class="saisieTitre"></div>
+								<div><input type="text" name="title" class="saisieTitre" required></div>
 								<div><label for="Category">Catégorie</label></div>
 								<div class="pourFleche">
-									<select name="category" class="saisieCategorie">
+									<select name="category" class="saisieCategorie" required>
 										<option value="">--choisissez une catégorie--</option>
 										<option value="1">objets</option>
 										<option value="2">Appartements</option>

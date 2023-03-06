@@ -4,6 +4,7 @@ import { deleteOne, ajouterImage } from "./modifierDom.js";
 
 if (localStorage.getItem("token") != null && localStorage.getItem("token") != "undefined") {
   // Header admin
+  console.log(localStorage.getItem("token"))
   const top = document.querySelector("header");
   const bandeauNoir = document.createElement("div");
   bandeauNoir.id = "bandeauNoir";
@@ -115,7 +116,7 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
       function deleteAll() {
         const bearerToken = localStorage.getItem("token")
         // Le machin qui supprime
-        fetch(`http://localhost:5678/api/works/0`, {
+        fetch(`http://localhost:5678/api/works/[i]`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -125,9 +126,6 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
       }
       const boutonDel = document.getElementById("supprimerGalerie");
       boutonDel.addEventListener("click", deleteAll);
-
-      // const recupererId = document.querySelector(`.corbeille_0`)
-      // recupererId.addEventListener('click', delete)
 
     }
   }
