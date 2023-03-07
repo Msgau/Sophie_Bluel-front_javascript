@@ -4,7 +4,6 @@ import { deleteOne, ajouterImage } from "./modifierDom.js";
 
 if (localStorage.getItem("token") != null && localStorage.getItem("token") != "undefined") {
   // Header admin
-  console.log(localStorage.getItem("token"))
   const top = document.querySelector("header");
   const bandeauNoir = document.createElement("div");
   bandeauNoir.id = "bandeauNoir";
@@ -15,18 +14,29 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
   boutonLogout.id = "sortie";
   boutonLogout.innerHTML = "logout";
   top.appendChild(bandeauNoir);
-  
+  //suppression du bandeau filtres
+  const delFiltres = document.querySelector(".filtres")
+  delFiltres.style.display = "none"
   //Fonction logout
   function logout() {
     localStorage.removeItem("token");
   }
   boutonLogout.addEventListener("click", logout)
   // Bouton modifier PP
+
   const boutonModifierPP = document.querySelector("main figure");
   const divModifierPP = document.createElement("div");
-  divModifierPP.className = "modifier";
+  divModifierPP.className = "modifierPP";
   divModifierPP.innerHTML = `<i class="fa-regular fa-pen-to-square"></i> modifier`
   boutonModifierPP.appendChild(divModifierPP);
+
+  // Bouton modifier Edito
+  const boutonModifierEdito = document.querySelector("main article");
+  const divModifierEdito = document.createElement("div");
+  divModifierEdito.className = "modifierEd";
+  divModifierEdito.innerHTML = `<i class="fa-regular fa-pen-to-square"></i> modifier`
+  boutonModifierEdito.insertBefore(divModifierEdito, boutonModifierEdito.firstChild);
+
   // Bouton modifier projets
   // const boutonModifierProjets = document.querySelector("#portfolio");
   // boutonModifierProjets.innerHTML=` Insérer ici le html terminé`
@@ -77,7 +87,7 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
   const reponseModale = await fetch('http://localhost:5678/api/works'); // On va chercher le Json
   const objets = await reponseModale.json(); // On crée une const objets qu'on asssocie au résultat renvoyé par le json. Equivalent à "1ere ligne".then.pieces => pieces.json();
   if (reponseModale.ok) {
-    console.log(objets)
+    console.log("connecté au serveur")
   }
   // pour tous les objets, on utilise un for of. On utilise aussi une fonction gernererObjets comme ça on pourra la rappeler plusieurs fois pour mettre à jour la page web
   function genererObjetsModale(objets) {
@@ -88,14 +98,16 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
       const sectionGallery = document.querySelector(".galleryModale");
       // Création de la balise figure qui englobe image et titre
       const objetElement = document.createElement("figure");
+      objetElement.className = "cadres"
+      objetElement.id = "cadre_" + article.id
       const divImageElement = document.createElement("div");
       divImageElement.className = "cadreImage"
       const imageElement = document.createElement("img");
       imageElement.src = article.imageUrl;
       imageElement.alt = article.title;
       const btnCorbeille = document.createElement("button")
-      btnCorbeille.className = `corbeille_` + [i] + ` trash`
-      btnCorbeille.id = article.id;
+      btnCorbeille.className = `trash`
+      btnCorbeille.id = "corbeille_" + article.id;
       btnCorbeille.innerHTML = `<i class="fa-regular fa-trash-can"></i>`
       const btnEditer = document.createElement("div")
       btnEditer.className = "btnEditerModale"
@@ -109,21 +121,19 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
       objetElement.appendChild(divImageElement);
       objetElement.appendChild(btnEditer);
 
-      // console.log(`.corbeille_` + [i] + ` trash`)
-      // console.log(objets[i].id)
+      // Supprimer tout
       
-      
-      function deleteAll() {
-        const bearerToken = localStorage.getItem("token")
-        // Le machin qui supprime
-        fetch(`http://localhost:5678/api/works/[i]`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${bearerToken}`
-          }
-        });
-      }
+      // function deleteAll() {
+      //   const bearerToken = localStorage.getItem("token")
+      //   // Le machin qui supprime
+      //   fetch(`http://localhost:5678/api/works/${article.id}`, {
+      //     method: "DELETE",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //       "Authorization": `Bearer ${bearerToken}`
+      //     }
+      //   });
+      // }
       const boutonDel = document.getElementById("supprimerGalerie");
       boutonDel.addEventListener("click", deleteAll);
 
@@ -142,11 +152,38 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
     modal2.querySelector('.js-modal-close2').removeEventListener('click', closeModal2)
     modal2.querySelector('.js-modal-stop2').removeEventListener('click', stopPropagation)
     modal2 = null
-    // sectionGallery.innerText = "";
   }
+
+  // Griser le bouton valider si les champs ne sont pas remplis
+
+
+  function DisableSubmit(){
+    function updateSubmitBtnState() {
+      if (imageInput.validity.valid && titleInput.validity.valid && categoryInput.validity.valid) {
+        submitBtn.disabled = false;
+        submitBtn.setAttribute("class", "validerVert")
+      } else {
+        submitBtn.disabled = true;
+        submitBtn.setAttribute("class", "valider")
+      }
+    }
+    const imageInput = document.getElementById("imageUp");
+    const titleInput = document.getElementById("title");
+    const categoryInput = document.getElementById("category");
+    const submitBtn = document.getElementById("submit-btn");
+    console.log(imageInput, titleInput, categoryInput, submitBtn)
+
+    imageInput.addEventListener("input", updateSubmitBtnState);
+    titleInput.addEventListener("input", updateSubmitBtnState);
+    categoryInput.addEventListener("input", updateSubmitBtnState);
+  }
+
+  // Ouvrir la seconde modale
+
   function openModal2(e) {
     e.preventDefault()
     ajouterImage();
+    DisableSubmit();
     // fetchPostWork();
     // addWork();
     const target = document.querySelector('.modal2')
@@ -171,25 +208,24 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
 
   const ciblerImage = document.querySelector('#imageUp');
   ciblerImage.addEventListener('change', previewFile);
+
   function previewFile() {
     const verificationExtension = /\.(jpe?g|png)$/i; // Permet // de n'autoriser que les jpeg, jpg et png
     if (this.files.length === 0 || !verificationExtension.test(this.files[0].name)) { // Si il  n'y a pas de fichier, ou si verificationExtension teste le nom du fichier et que ça renvoie false (ou inversement si on elève le !) ne pas executer le code après
-      console.log("fef")
       return
     }
 
+    // Supprime l'affichage original pour le remplacer par la div dans laquelle sera affiché l'aperçu
+
     const vanishApercu = document.querySelector('.apercu');
-    // vanishApercu.innerText = "";
-    const divApercu = document.createElement("div");
-    divApercu.id = "fenetreApercu";
-    vanishApercu.appendChild(divApercu)
+    vanishApercu.style.display = "none";
+    const addClassPreview = document.getElementById('fenetreApercu')
+    addClassPreview.setAttribute("class", "apercuImage")
+
 
     const file = this.files[0];
-
     const fileReader = new FileReader(); //
-
     fileReader.readAsDataURL(file);
-
     fileReader.addEventListener('load', (event) => displayImage(event, file));
 
     function displayImage(event, file) {
@@ -199,11 +235,11 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
       imageElement.src = event.target.result;
 
       const figcaptionElement = document.createElement('figcaption')
-      figcaptionElement.textContent = `fichier selectionné : ${file.name}`
+      figcaptionElement.textContent = `fichier sélectionné : ${file.name}`
 
       figureElement.appendChild(imageElement)
 
-      document.querySelector('#fenetreApercu').appendChild(figureElement);
+      document.getElementById('fenetreApercu').appendChild(figureElement);
     }
   }
 }
@@ -216,9 +252,6 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
 
 const reponse = await fetch('http://localhost:5678/api/works'); // On va chercher le Json
 const objets = await reponse.json(); // On crée une const objets qu'on asssocie au résultat renvoyé par le json. Equivalent à "1ere ligne".then.pieces => pieces.json();
-if (reponse.ok) {
-  console.log("L'équipe est OK")
-}
 // pour tous les objets, on utilise un for of. On utilise aussi une fonction gernererObjets comme ça on purra la rappeler plusieurs fois pour mettre à jour la page web
 function genererObjets(objets) {
   for (let i = 0; i < objets.length; i++) {
