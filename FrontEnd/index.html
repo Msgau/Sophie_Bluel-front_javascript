@@ -53,7 +53,7 @@
 		<section id="portfolio">
 			<div class="btnProjets">
 				<h2>Mes Projets</h2>
-				<div class="modifier"><i class="fa-regular fa-pen-to-square"></i> <a href="#modal1"
+				<div class="modifierProjets"><i class="fa-regular fa-pen-to-square"></i> <a href="#modal1"
 						id="modifier">modifier</a></div>
 			</div>
 			<div class="filtres">
@@ -83,6 +83,7 @@
 					<h3>Ajout Photo</h3>
 					<div class="blocAjoutPhoto">
 						<form id="connexion">
+
 							<div class="apercu">
 								<img src="assets/icons/image.png" alt="iconImage">
 
@@ -91,26 +92,28 @@
 									<label for="imageUp">+ Ajouter photo</label>
 								</div>
 								<div id="restrictions">jpg, png : 4mo max</div>
-								<div id="fenetreApercu"></div>
 							</div>
+							<div id="fenetreApercu"></div>
+
 							<div class="titreCategorie">
 
 								<div><label for="Title">Titre</label></div>
-								<div><input type="text" name="title" class="saisieTitre" required></div>
+								<div><input type="text" name="title" id = "title" class="saisieTitre" required></div>
 								<div><label for="Category">Catégorie</label></div>
 								<div class="pourFleche">
-									<select name="category" class="saisieCategorie" required>
+									<select name="category" id = "category" class="saisieCategorie" required>
 										<option value="">--choisissez une catégorie--</option>
 										<option value="1">objets</option>
 										<option value="2">Appartements</option>
 										<option value="3">Hôtels et restaurants</option>
 									</select>
-								</div>
-								<img src="assets/icons/flechecategorie.png" alt="flechecategorie"
+									<img src="assets/icons/flechecategorie.png" alt="flechecategorie"
 									class="flechecategorie">
+								</div>
+								
 							</div>
 							<div class="barreOmbre"></div>
-							<button class="valider">Valider</button>
+							<button class="valider" id = "submit-btn" disabled>Valider</button>
 						</form>
 					</div>
 				</div>

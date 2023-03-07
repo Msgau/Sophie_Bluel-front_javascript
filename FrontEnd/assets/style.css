@@ -105,6 +105,7 @@ menu,
 nav,
 section {
 	display: block;
+
 }
 
 body {
@@ -206,8 +207,7 @@ li:hover {
 	flex: 1
 }
 
-#introduction img,
-figure .modifier {
+#introduction img{
 	display: block;
 	margin: auto;
 	width: 80%;
@@ -225,8 +225,7 @@ figure .modifier {
 	margin-bottom: 0.5em;
 }
 
-#portfolio h2,
-#portfolio .modifier {
+#portfolio h2{
 	text-align: center;
 	margin-bottom: 1em;
 }
@@ -301,18 +300,22 @@ header {
 }
 
 /* Boutons modifier */
-figure .modifier {
-	margin-top: 15px;
+.modifierPP {
+	margin: 15px auto auto auto;
+	width: 80%;
 }
-
+.modifierEd{
+	margin-bottom: 15px;
+}
 .btnProjets {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-#portfolio .modifier {
+#portfolio .modifierProjets {
 	margin-left: 30px;
+	margin-bottom: 25px;
 }
 
 .gallery {
@@ -503,7 +506,7 @@ footer nav ul {
 	justify-content: center;
 	align-items: center;
 }
-.apercu{
+.apercu, .apercuImage{
 	background-color: #E8F1F7;
 	width: 420px;
 	height: 169px;
@@ -512,6 +515,7 @@ footer nav ul {
 	justify-content: center;
 	align-items: center;
 }
+
 .boutonParcourir{
 	width: 173px;
 	height: 36px;
@@ -549,6 +553,16 @@ footer nav ul {
 	font-family: 'syne', Arial, Helvetica, sans-serif;
 	margin-left: 90px;
 }
+.validerVert{
+	width: 237px;
+	height: 36px;
+	border-radius: 60px;
+	border: none;
+	background-color: #1D6154;
+	color: white;
+	font-family: 'syne', Arial, Helvetica, sans-serif;
+	margin-left: 90px;
+}
 select {
 	appearance: none;
   }
@@ -578,6 +592,7 @@ label[for="imageUp"]{ /* Permet de sélectionner le bouton à mettre en forme */
 	margin-bottom: 7px;
 	transition-duration: 0.5s;
 	margin-top: 20px;
+	transform: ;
   }
   label[for="imageUp"]:hover{ /* Permet de sélectionner le bouton à mettre en forme */
 	background-color: #1D6154;
@@ -598,3 +613,15 @@ label[for="imageUp"]{ /* Permet de sélectionner le bouton à mettre en forme */
 	margin: 0;
 	height: 169px;
   }
+
+  .hidden{
+	animation: divDisapear 500ms ease;
+	animation-delay:0ms;
+	animation-fill-mode: both;  
+  }
+  
+  @keyframes divDisapear{
+	0%{opacity: 1;}
+	100%{opacity: 0;}
+  }
+  
