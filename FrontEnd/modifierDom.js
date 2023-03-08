@@ -79,7 +79,7 @@ export function ajouterImage() {
       document.getElementById("submit-btn").setAttribute("class", "valider");
       document.querySelector(".gallery").innerHTML = "";
       const inputFile = document.getElementById("imageUp")
-      console.log(inputFile.files[0].size)
+      // console.log(inputFile.files[0].size)
       if (inputFile.files[0].size < 4000000) {
         const formData = new FormData(formImageUp);
         EnvoiImage(formData)
@@ -98,6 +98,10 @@ function retourInput(){
   departApercu.removeAttribute("class")
   departApercu.innerHTML= ""
   document.getElementById("imageUp").value = "";
+  document.querySelector(".saisieTitre").value = "";
+  document.getElementById("category").value = "";
+
+
 }
 function stopPropagation(e) {
   e.stopPropagation()

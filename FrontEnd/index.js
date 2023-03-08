@@ -109,7 +109,7 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
   const delFiltres = document.querySelector(".filtres")
   delFiltres.style.display = "none"
 
-  // Modale
+  // Modales
   let modal = null;
   let modal2 = null;
 
@@ -193,12 +193,9 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
         e.preventDefault();
         deleteAll(article);
       });
-
     }
     deleteOne();
   }
-
-
 
   function closeModal2(e) {
     if (modal2 === null) return
@@ -230,7 +227,6 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
     const titleInput = document.getElementById("title");
     const categoryInput = document.getElementById("category");
     const submitBtn = document.getElementById("submit-btn");
-    console.log(imageInput, titleInput, categoryInput, submitBtn)
 
     imageInput.addEventListener("input", updateSubmitBtnState);
     titleInput.addEventListener("input", updateSubmitBtnState);
@@ -243,8 +239,6 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
     e.preventDefault();
     ajouterImage();
     DisableSubmit();
-    // fetchPostWork();
-    // addWork();
     const target = document.querySelector('.modal2')
     target.style.display = null
     target.setAttribute('aria-hidden', false)
