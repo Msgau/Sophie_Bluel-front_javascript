@@ -1,4 +1,4 @@
-import { deleteOne, ajouterImage } from "./modifierDom.js";
+import { deleteOne, deleteAll, ajouterImage } from "./modifierDom.js";
 
 // Affichage admin
 
@@ -14,9 +14,7 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
   boutonLogout.id = "sortie";
   boutonLogout.innerHTML = "logout";
   top.appendChild(bandeauNoir);
-  //suppression du bandeau filtres
-  const delFiltres = document.querySelector(".filtres")
-  delFiltres.style.display = "none"
+
   //Fonction logout
   function logout() {
     localStorage.removeItem("token");
@@ -38,8 +36,78 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
   boutonModifierEdito.insertBefore(divModifierEdito, boutonModifierEdito.firstChild);
 
   // Bouton modifier projets
-  // const boutonModifierProjets = document.querySelector("#portfolio");
-  // boutonModifierProjets.innerHTML=` Insérer ici le html terminé`
+  const boutonModifierProjets = document.querySelector("#portfolio");
+  boutonModifierProjets.innerHTML=`<div class="btnProjets">
+  <h2>Mes Projets</h2>
+  <div class="modifierProjets"><i class="fa-regular fa-pen-to-square"></i> <a href="#modal1"
+      id="modifier">modifier</a></div>
+</div>
+<div class="filtres">
+  <button class="btnTous">Tous</button>
+  <button class="btnItems">Objets</button>
+  <button class="btnAppartements">Appartements</button>
+  <button class="btnHotels">Hôtels et restaurants</button>
+</div>
+<div class="gallery"></div>
+<aside class="modal" aria-hidden="true" role="dialog" aria-modal="false" style="display: none;">
+  <div class="modal-wrapper js-modal-stop">
+    <button class="js-modal-close"><i class="fa-solid fa-xmark"></i></button>
+    <h3>Galerie Photo</h3>
+    <div class="galleryModale" id="hideAll"></div>
+    <div class="BlocBasModale">
+      <div class="barreOmbre"></div>
+      <button class="btnAdd">Ajouter une photo</button>
+      <div class="supprimerGalerie"><a href="#" id="supprimerGalerie">supprimer la galerie</a></div>
+    </div>
+  </div>
+</aside>
+
+<aside class="modal2" aria-hidden="true" role="dialog" aria-modal="false" style="display: none;">
+  <div class="modal-wrapper2 js-modal-stop2">
+    <button class="retour-modal-1"><i class="fa-solid fa-arrow-left"></i></button>
+    <button class="js-modal-close2"><i class="fa-solid fa-xmark"></i></button>
+    <h3>Ajout Photo</h3>
+    <div class="blocAjoutPhoto">
+      <form id="connexion">
+
+        <div class="apercu">
+          <img src="assets/icons/image.png" alt="iconImage">
+
+          <div class="btnParcourir">
+            <input type="file" name="image" accept=".jpg, .png" id="imageUp" hidden required />
+            <label for="imageUp">+ Ajouter photo</label>
+          </div>
+          <div id="restrictions">jpg, png : 4mo max</div>
+        </div>
+        <div id="fenetreApercu"></div>
+
+        <div class="titreCategorie">
+
+          <div><label for="Title">Titre</label></div>
+          <div><input type="text" name="title" id = "title" class="saisieTitre" required></div>
+          <div><label for="Category">Catégorie</label></div>
+          <div class="pourFleche">
+            <select name="category" id = "category" class="saisieCategorie" required>
+              <option value="">--choisissez une catégorie--</option>
+              <option value="1">objets</option>
+              <option value="2">Appartements</option>
+              <option value="3">Hôtels et restaurants</option>
+            </select>
+            <img src="assets/icons/flechecategorie.png" alt="flechecategorie"
+            class="flechecategorie">
+          </div>
+          
+        </div>
+        <div class="barreOmbre"></div>
+        <button class="valider" id = "submit-btn" disabled>Valider</button>
+      </form>
+    </div>
+  </div>
+</aside>`
+
+  //suppression du bandeau filtres
+  const delFiltres = document.querySelector(".filtres")
+  delFiltres.style.display = "none"
 
   // Modale
   let modal = null;
@@ -59,11 +127,13 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
     modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)
     modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)
     modal = null
-    // sectionGallery.innerText = "";
   }
 
   function openModal(e) {
     e.preventDefault()
+    const affichageGallery = document.querySelector(".galleryModale")
+    affichageGallery.style.display = "grid"
+    affichageGallery.setAttribute("class", "galleryModale")
     const target = document.querySelector('.modal')
     target.style.display = null
     target.setAttribute('aria-hidden', false)
@@ -74,7 +144,6 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
     modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
     document.querySelector(".galleryModale").innerHTML = "";
     genererObjetsModale(objets);
-    deleteOne();
   }
   window.addEventListener('keydown', function (e) {
     if (e.key === "Escape") {
@@ -84,13 +153,11 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
   const modal1 = document.getElementById("modifier")
   modal1.addEventListener('click', openModal)
 
+  // pour tous les objets, on utilise un for of. On utilise aussi une fonction gernererObjets comme ça on pourra la rappeler plusieurs fois pour mettre à jour la page web
+  async function genererObjetsModale() {
   const reponseModale = await fetch('http://localhost:5678/api/works'); // On va chercher le Json
   const objets = await reponseModale.json(); // On crée une const objets qu'on asssocie au résultat renvoyé par le json. Equivalent à "1ere ligne".then.pieces => pieces.json();
-  if (reponseModale.ok) {
-    console.log("connecté au serveur")
-  }
-  // pour tous les objets, on utilise un for of. On utilise aussi une fonction gernererObjets comme ça on pourra la rappeler plusieurs fois pour mettre à jour la page web
-  function genererObjetsModale(objets) {
+
     for (let i = 0; i < objets.length; i++) {
 
       const article = objets[i];
@@ -112,8 +179,6 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
       const btnEditer = document.createElement("div")
       btnEditer.className = "btnEditerModale"
       btnEditer.innerText = "éditer";
-      // const titreElement = document.createElement("figcaption");
-      // titreElement.innerText = article.title;
 
       sectionGallery.appendChild(objetElement);
       divImageElement.appendChild(btnCorbeille);
@@ -123,21 +188,14 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
 
       // Supprimer tout
       
-      // function deleteAll() {
-      //   const bearerToken = localStorage.getItem("token")
-      //   // Le machin qui supprime
-      //   fetch(`http://localhost:5678/api/works/${article.id}`, {
-      //     method: "DELETE",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //       "Authorization": `Bearer ${bearerToken}`
-      //     }
-      //   });
-      // }
       const boutonDel = document.getElementById("supprimerGalerie");
-      boutonDel.addEventListener("click", deleteAll);
+      boutonDel.addEventListener("click", (e)=> {
+        e.preventDefault();
+        deleteAll(article);
+      });
 
     }
+    deleteOne();
   }
 
 
@@ -160,13 +218,14 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
   function DisableSubmit(){
     function updateSubmitBtnState() {
       if (imageInput.validity.valid && titleInput.validity.valid && categoryInput.validity.valid) {
+        if(imageInput.files[0].size < 4000000) {
         submitBtn.disabled = false;
         submitBtn.setAttribute("class", "validerVert")
       } else {
         submitBtn.disabled = true;
         submitBtn.setAttribute("class", "valider")
       }
-    }
+    }}
     const imageInput = document.getElementById("imageUp");
     const titleInput = document.getElementById("title");
     const categoryInput = document.getElementById("category");
@@ -181,7 +240,7 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
   // Ouvrir la seconde modale
 
   function openModal2(e) {
-    e.preventDefault()
+    e.preventDefault();
     ajouterImage();
     DisableSubmit();
     // fetchPostWork();
@@ -194,6 +253,7 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
     modal2.addEventListener('click', closeModal2)
     modal2.querySelector('.js-modal-close2').addEventListener('click', closeModal2)
     modal2.querySelector('.js-modal-stop2').addEventListener('click', stopPropagation)
+    
   }
 
   const modal21 = document.querySelector(".btnAdd")
@@ -208,10 +268,11 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
 
   const ciblerImage = document.querySelector('#imageUp');
   ciblerImage.addEventListener('change', previewFile);
-
+  
   function previewFile() {
     const verificationExtension = /\.(jpe?g|png)$/i; // Permet // de n'autoriser que les jpeg, jpg et png
-    if (this.files.length === 0 || !verificationExtension.test(this.files[0].name)) { // Si il  n'y a pas de fichier, ou si verificationExtension teste le nom du fichier et que ça renvoie false (ou inversement si on elève le !) ne pas executer le code après
+    if (this.files.length === 0 || !verificationExtension.test(this.files[0].name) || ciblerImage.files[0].size > 4000000) { // Si il  n'y a pas de fichier, ou si verificationExtension teste le nom du fichier et que ça renvoie false (ou inversement si on elève le !), ou si le fichier est trop gros, ne pas executer le code après
+      document.getElementById("restrictions").style.color = "red"
       return
     }
 
