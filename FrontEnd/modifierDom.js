@@ -50,7 +50,6 @@ export function deleteOne(){
         document.getElementById("supprimerGalerie").innerHTML = "Gallerie supprimée avec succès";
         document.querySelector(".gallery").innerHTML = "";
       }
-
     }
 
 
@@ -97,11 +96,7 @@ function retourInput(){
   const departApercu = document.getElementById('fenetreApercu')
   departApercu.removeAttribute("class")
   departApercu.innerHTML= ""
-  document.getElementById("imageUp").value = "";
-  document.querySelector(".saisieTitre").value = "";
-  document.getElementById("category").value = "";
-
-
+  document.getElementById("connexion").reset();
 }
 function stopPropagation(e) {
   e.stopPropagation()
