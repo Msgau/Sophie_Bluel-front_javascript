@@ -1,5 +1,5 @@
 // if(localStorage.getItem("token") == null){
-
+    const erreur = document.querySelector(".forgot");
 async function login() {
     // envoi des données récupérées de l'utilisateur
     await fetch("http://localhost:5678/api/users/login", {
@@ -10,29 +10,32 @@ async function login() {
         }),
         headers: { 'Accept': 'application/json', "Content-Type": "application/json" }
     })
+    .then(response => {
+        if (!response.ok) {
+            logout();
+            erreur.innerHTML = "Erreur dans l’identifiant ou le mot de passe";
+        }
+        return response.json();
+      })
 
-        .then((res) => res.json())
         .then((data) => {
-            // récupération de la commande dans la console
-            console.log(data);
-            // création d'un ID de commande dans le localstorage
-            // localStorage.setItem("token", JSON.stringify(data.token));
-            localStorage.setItem("token", JSON.stringify(data.token).substring(1, JSON.stringify(data.token).length-1));
-            console.log("token " + localStorage.getItem('token'))
+            if (data.token) {
+                // récupération de la commande dans la console
+                console.log(data);
+                // création d'un ID de commande dans le localstorage
+                localStorage.setItem("token", JSON.stringify(data.token).substring(1, JSON.stringify(data.token).length - 1));
+                console.log("token " + localStorage.getItem('token'))
+            }
         })
 
+    if (localStorage.getItem("token") != null) {
+        document.location.href = "index.html"
+    }
     function logout() {
         localStorage.removeItem("token");
     }
 
-    if (localStorage.getItem("token") == "undefined") {
-        const erreur = document.querySelector(".forgot");
-        logout();
-        erreur.innerHTML = "Erreur dans l’identifiant ou le mot de passe";
-    }
-    else if (localStorage.getItem("token") != null) {
-        document.location.href = "index.html"
-    }
+
 }
 
 const boutonCo = document.getElementById("submit-btn");
