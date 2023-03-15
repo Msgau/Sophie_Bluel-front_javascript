@@ -1,101 +1,96 @@
-function supprimerDom(trashId){
+function supprimerDom(trashId) {
 
   const cadres = `cadre_${trashId}`
   const selectionCadre = document.getElementById(cadres)
   selectionCadre.setAttribute("class", "hidden")
   setTimeout(vanish, 500)
-  function vanish(){
+  function vanish() {
     selectionCadre.style.display = "none";
   }
 
 }
 
-export function deleteOne(){
-    const imagesElements = document.querySelectorAll(".trash");
-    const bearerToken = localStorage.getItem("token")
-    for (let i = 0; i < imagesElements.length; i++){
-      const findId = imagesElements[i].id
-      imagesElements[i].addEventListener("click", function(event){
-        event.preventDefault();
-        const trashId = findId.substring(10);
-        console.log(trashId)
-        fetch(`http://localhost:5678/api/works/${trashId}`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${bearerToken}`
-          }})
-          supprimerDom(trashId);
-          setTimeout(genererObjets2, 50)
-          retourInput();
-          
-      })
-    }}
-
-  export function deleteAll(article) {
-      const bearerToken = localStorage.getItem("token")
-      // Le machin qui supprime
-      fetch(`http://localhost:5678/api/works/${article.id}`, {
+export function deleteOne() {
+  const imagesElements = document.querySelectorAll(".trash");
+  const bearerToken = localStorage.getItem("token")
+  for (let i = 0; i < imagesElements.length; i++) {
+    const findId = imagesElements[i].id
+    imagesElements[i].addEventListener("click", function (event) {
+      event.preventDefault();
+      const trashId = findId.substring(10);
+      console.log(trashId)
+      fetch(`http://localhost:5678/api/works/${trashId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${bearerToken}`
         }
-      });
-      const delGallery = document.querySelector(".galleryModale");
-      delGallery.setAttribute("class", "galleryModale hidden");
-      setTimeout(vanishAll, 500)
-      function vanishAll(){
-        delGallery.style.display = "none"
-        document.getElementById("supprimerGalerie").innerHTML = "Gallerie supprimée avec succès";
-        document.querySelector(".gallery").innerHTML = "";
-      }
+      })
+      supprimerDom(trashId); // Applique le display : none pour faire disparaitre le cadre
+      setTimeout(genererObjets2, 100) // Met à jour le dom
+    })
+  }
+}
+
+export function deleteAll(article) {
+  const bearerToken = localStorage.getItem("token")
+  fetch(`http://localhost:5678/api/works/${article.id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${bearerToken}`
     }
+  });
+  const delGallery = document.querySelector(".galleryModale");
+  delGallery.setAttribute("class", "galleryModale hidden");
+  setTimeout(vanishAll, 500)
+  function vanishAll() {
+    delGallery.style.display = "none"
+    document.getElementById("supprimerGalerie").innerHTML = "Gallerie supprimée avec succès";
+    document.querySelector(".gallery").innerHTML = "";
+  }
+}
 
 
-
-    async function EnvoiImage(formData) {
+async function EnvoiImage(formData) {
   try {
     const getToken = localStorage.getItem("token")
     await fetch("http://localhost:5678/api/works", {
       method: "POST",
       headers: {
-        'accept':'application/json',
+        'accept': 'application/json',
         "Authorization": `Bearer ${getToken}`
       },
       body: formData
     })
-    
   } catch (err) {
     console.log('Une erreur est survenue', err)
   }
 }
 
 export function ajouterImage() {
-    const formImageUp = document.getElementById("connexion");
-    formImageUp.addEventListener('submit', function (event) {
-      event.preventDefault();
-      document.getElementById("submit-btn").setAttribute("class", "valider");
-      document.querySelector(".gallery").innerHTML = "";
-      const inputFile = document.getElementById("imageUp")
-      // console.log(inputFile.files[0].size)
-      if (inputFile.files[0].size < 4000000) {
-        const formData = new FormData(formImageUp);
-        EnvoiImage(formData)
-        setTimeout(genererObjets2, 50)
-        retourInput()
-        closeModal2()
-      }
-    });
+  const formImageUp = document.getElementById("connexion");
+  function submitHandler(event) {
+    event.preventDefault();
+    document.getElementById("submit-btn").setAttribute("class", "valider");
+    document.querySelector(".gallery").innerHTML = "";
+    const formData = new FormData(formImageUp);
+    EnvoiImage(formData)
+    setTimeout(genererObjets2, 300)
+    retourInput()
+    closeModal2()
+    formImageUp.removeEventListener('submit', submitHandler)
+  }
+  formImageUp.addEventListener('submit', submitHandler)
 }
 
 // Affiche à nouveau le bouton parcourir à la place de l'aperçu
-function retourInput(){
+function retourInput() {
   const retourBtn = document.querySelector('.apercu');
   retourBtn.style.display = "flex"
   const departApercu = document.getElementById('fenetreApercu')
   departApercu.removeAttribute("class")
-  departApercu.innerHTML= ""
+  departApercu.innerHTML = ""
   document.getElementById("connexion").reset();
 }
 function stopPropagation(e) {

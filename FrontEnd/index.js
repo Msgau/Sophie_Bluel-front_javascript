@@ -187,7 +187,6 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
       objetElement.appendChild(btnEditer);
 
       // Supprimer tout
-      
       const boutonDel = document.getElementById("supprimerGalerie");
       boutonDel.addEventListener("click", (e)=> {
         e.preventDefault();
@@ -220,6 +219,7 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
         submitBtn.setAttribute("class", "validerVert")
       } else {
         submitBtn.disabled = true;
+        submitBtn.removeAttribute("class", "validerVert")
         submitBtn.setAttribute("class", "valider")
       }
     }}
@@ -231,6 +231,7 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
     imageInput.addEventListener("input", updateSubmitBtnState);
     titleInput.addEventListener("input", updateSubmitBtnState);
     categoryInput.addEventListener("input", updateSubmitBtnState);
+
   }
 
   // Ouvrir la seconde modale
@@ -250,9 +251,9 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
     
   }
 
-  const modal21 = document.querySelector(".btnAdd")
-  modal21.addEventListener('click', closeModal)
-  modal21.addEventListener('click', openModal2)
+  const btnModal2 = document.querySelector(".btnAdd")
+  btnModal2.addEventListener('click', closeModal)
+  btnModal2.addEventListener('click', openModal2)
 
   const retourModal1 = document.querySelector('.retour-modal-1')
   retourModal1.addEventListener('click', closeModal2)
