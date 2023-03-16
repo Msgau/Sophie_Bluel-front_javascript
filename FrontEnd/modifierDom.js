@@ -18,7 +18,6 @@ export function deleteOne() {
     imagesElements[i].addEventListener("click", function (event) {
       event.preventDefault();
       const trashId = findId.substring(10);
-      console.log(trashId)
       fetch(`http://localhost:5678/api/works/${trashId}`, {
         method: "DELETE",
         headers: {
@@ -27,7 +26,7 @@ export function deleteOne() {
         }
       })
       supprimerDom(trashId); // Applique le display : none pour faire disparaitre le cadre
-      setTimeout(genererObjets2, 100) // Met à jour le dom
+      setTimeout(genererObjets2, 500) // Met à jour le dom
     })
   }
 }
@@ -92,6 +91,8 @@ function retourInput() {
   departApercu.removeAttribute("class")
   departApercu.innerHTML = ""
   document.getElementById("connexion").reset();
+  document.getElementById("restrictions").style.color = "#444444"
+  document.getElementById("supprimerGalerie").innerText = "supprimer la galerie"
 }
 function stopPropagation(e) {
   e.stopPropagation()

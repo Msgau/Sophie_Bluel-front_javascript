@@ -28,24 +28,16 @@
     <article>
         <h2>Log In</h2>
         <div class="already">
-            <form method="post" class="connexion" action="index.html">
-                <div>
-                    <label for="E-mail">E-mail</label> :
-                </div>
-                <div>
-                    <input type="email" name="email" class="email" id="email">
-                </div>
-                <div>
-                    <label for="password" class="mdp">Mot de passe</label> :
-                </div>
-                <div>
-                    <input type="password" name="password" class="password" id="code">
-                    <div id="code-validation"></div>
-                </div>
+            <form method="post" class="connexion" id= "formCo">
+                <label for="E-mail" class="em">E-mail</label>
+                <input type="email" name="email" class="email" id="email">
+                <label for="password" class="mdp">Mot de passe</label>
+                <input type="password" name="password" class="password" id="code">
+                <input type="submit" value="se connecter" id="submit-btn">
             </form>
-            <input type="submit" value="Se connecter" id="submit-btn">
-
             <p class="forgot"></p>
+            <p id="mdpOublie">mot de passe oublié</p>
+
         </div>
     </article>
 </body>

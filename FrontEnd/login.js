@@ -34,5 +34,8 @@ async function login() {
     }
 }
 
-const boutonCo = document.getElementById("submit-btn");
-boutonCo.addEventListener("click", login);
+const boutonCo = document.getElementById("formCo");
+boutonCo.addEventListener("submit", function(event) {
+    event.preventDefault();
+    login();
+  });

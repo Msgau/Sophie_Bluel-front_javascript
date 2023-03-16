@@ -214,13 +214,14 @@ if (localStorage.getItem("token") != null && localStorage.getItem("token") != "u
   function DisableSubmit(){
     function updateSubmitBtnState() {
       if (imageInput.validity.valid && titleInput.validity.valid && categoryInput.validity.valid) {
-        if(imageInput.files[0].size < 4000000) {
-        submitBtn.disabled = false;
-        submitBtn.setAttribute("class", "validerVert")
+        const verificationExtension = /\.(jpe?g|png)$/i; // Permet // de n'autoriser que les jpeg, jpg et png
+    if (imageInput.files.length === 0 || !verificationExtension.test(imageInput.files[0].name) || imageInput.files[0].size > 4000000) {
+      submitBtn.disabled = true;
+      submitBtn.removeAttribute("class", "validerVert")
+      submitBtn.setAttribute("class", "valider")
       } else {
-        submitBtn.disabled = true;
-        submitBtn.removeAttribute("class", "validerVert")
-        submitBtn.setAttribute("class", "valider")
+submitBtn.disabled = false;
+        submitBtn.setAttribute("class", "validerVert")
       }
     }}
     const imageInput = document.getElementById("imageUp");
